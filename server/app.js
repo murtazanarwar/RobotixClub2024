@@ -13,7 +13,7 @@ const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 
 app.use(cors({
-  origin: 'http://localhost:3001', // URL of Next.js frontend
+  origin: 'http://localhost:3000', // URL of Next.js frontend
 }));
 
 app.use(bodyParser.json());
