@@ -1,4 +1,5 @@
-Robotix Club 2024 Website
+# Robotix Club 2024 Website
+
 Welcome to the Robotix Club 2024 Website project! Follow the steps below to set up and run the application locally.
 
 # Getting Started
@@ -36,12 +37,13 @@ Step 3: Run the Application
 Once all dependencies are installed and environment variables are configured:
 
 Start the Client:
+    
     cd client
     npm run dev
 
 Start the Server:
+    
     cd server
     node server.js
 
 Your website will be running locally on http://localhost:3000.
-
