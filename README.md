@@ -20,7 +20,7 @@ Server-side:
 ### Step 2: Create Environment Configuration: 
 Create a .env file in the root of the server directory with the following content:
 
-    PORT=3000
+    PORT=5000
     MONGO_URI=your_mongodb_connection_string
     JWT_SECRET=set_your_JWT_Secret
 
