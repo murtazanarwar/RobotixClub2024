@@ -34,12 +34,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 
-app.get('/hello', (req, res) => {
-  res.json({
-    msg: "hello"
-  });
-});
-
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
