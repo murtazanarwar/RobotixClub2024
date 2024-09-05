@@ -7,11 +7,13 @@ Welcome to the Robotix Club 2024 Website project! Follow the steps below to set 
 Step 1: Install Dependencies
 To run the website locally, you'll need to install the necessary dependencies for both the client and server. Use the following commands:
 
-    Client-side:
+Client-side:
+        
         cd client
         npm install
 
-    Server-side:
+Server-side:
+        
         cd server
         npm install
 
