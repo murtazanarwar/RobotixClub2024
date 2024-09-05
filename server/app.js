@@ -40,6 +40,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.get('/name', (req, res) => {
+  res.json({
+    msg: "hello"
+  });
+});
+
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
