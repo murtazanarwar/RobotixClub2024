@@ -3,12 +3,18 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
+const cors = require('cors');
+
 const app = express();
 
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
+
+app.use(cors({
+  origin: 'http://localhost:3001', // URL of Next.js frontend
+}));
 
 app.use(bodyParser.json());
 

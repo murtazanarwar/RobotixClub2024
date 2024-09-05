@@ -46,6 +46,6 @@ Start the Client:
 Start the Server:
     
     cd server
-    node server.js
+    npm run dev
 
-Your website will be running locally on http://localhost:3000.
+Your website will be running locally on http://localhost:3001.
