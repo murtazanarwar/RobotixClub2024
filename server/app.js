@@ -34,7 +34,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 
-app.get('/name', (req, res) => {
+app.get('/hello', (req, res) => {
   res.json({
     msg: "hello"
   });
