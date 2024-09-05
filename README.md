@@ -2,9 +2,9 @@
 
 Welcome to the Robotix Club 2024 Website project! Follow the steps below to set up and run the application locally.
 
-# Getting Started
+## Getting Started
 
-Step 1: Install Dependencies
+### Step 1: Install Dependencies: 
 To run the website locally, you'll need to install the necessary dependencies for both the client and server. Use the following commands:
 
 Client-side:
@@ -17,7 +17,7 @@ Server-side:
         cd server
         npm install
 
-Step 2: Create Environment Configuration
+### Step 2: Create Environment Configuration: 
 Create a .env file in the root of the server directory with the following content:
 
     PORT=3000
@@ -35,7 +35,7 @@ Create a .env file in the root of the server directory with the following conten
 3. Obtain your Google OAuth credentials (GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET) from the Google Developer Console.
 4. Set a unique SESSION_SECRET for secure session management.
 
-Step 3: Run the Application
+### Step 3: Run the Application: 
 Once all dependencies are installed and environment variables are configured:
 
 Start the Client:
