@@ -1,4 +1,4 @@
-# Robotix Club 2024 Website
+# Robotix Club 2024 Website [BLOG]
 
 Welcome to the Robotix Club 2024 Website project! Follow the steps below to set up and run the application locally.
 
@@ -8,14 +8,18 @@ Welcome to the Robotix Club 2024 Website project! Follow the steps below to set 
 To run the website locally, you'll need to install the necessary dependencies for both the client and server. Use the following commands:
 
 Client-side:
-        
+
+        ```bash
         cd client
         npm install
+        ```
 
 Server-side:
-        
+
+        ```bash
         cd server
         npm install
+        ```
 
 ### Step 2: Create Environment Configuration: 
 Create a .env file in the root of the server directory with the following content:
@@ -39,13 +43,17 @@ Create a .env file in the root of the server directory with the following conten
 Once all dependencies are installed and environment variables are configured:
 
 Start the Client:
-    
+
+    ```bash
     cd client
     npm run dev
+    ```
 
 Start the Server:
-    
+
+    ```bash
     cd server
     node server.js
+    ```
 
 Your website will be running locally on http://localhost:3000.
