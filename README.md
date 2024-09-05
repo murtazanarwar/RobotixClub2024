@@ -9,13 +9,13 @@ To run the website locally, you'll need to install the necessary dependencies fo
 
 Client-side:
         
-        cd client
-        npm install
+    cd client
+    npm install
 
 Server-side:
         
-        cd server
-        npm install
+    cd server
+    npm install
 
 ### Step 2: Create Environment Configuration: 
 Create a .env file in the root of the server directory with the following content:
