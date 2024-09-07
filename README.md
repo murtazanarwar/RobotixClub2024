@@ -48,4 +48,4 @@ Start the Server:
     cd server
     npm run dev
 
-Your website will be running locally on http://localhost:3001.
+Your website will be running locally on http://localhost:5173
