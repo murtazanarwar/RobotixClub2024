@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { login } from '../../api/authApi';
+import "./login.css"
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -29,28 +30,30 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <>
+      <div className='login'>
+        <h2>Login</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {success && <p style={{ color: 'green' }}>{success}</p>}
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </>
   );
 };
 
