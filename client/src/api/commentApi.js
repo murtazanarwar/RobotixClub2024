@@ -21,7 +21,3 @@ export const editComment = (commentId, commentData) => {
 export const deleteComment = (commentId) => {
   return axios.delete(`${API_BASE_URL}/${commentId}`);
 };
-
-export const getAllComments = () => {
-  return axios.get(`${API_BASE_URL}`);
-};
