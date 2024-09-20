@@ -31,28 +31,46 @@ const Login = () => {
 
   return (
     <>
-      <div className='login'>
-        <h2>Login</h2>
+      <div className="login-container">
+      <form className="login-form" onSubmit={handleLogin}>
+        <h2 className="animate-fade-in">Login</h2>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {success && <p style={{ color: 'green' }}>{success}</p>}
-        <form onSubmit={handleLogin}>
+        <div className="form-group animate-slide-up">
+          <label htmlFor="email">Email</label>
           <input
             type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
             required
           />
+        </div>
+        <div className="form-group animate-slide-up" style={{animationDelay: '0.1s'}}>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
             required
           />
-          <button type="submit">Login</button>
-        </form>
-      </div>
+        </div>
+        <button type="submit" className="login-button animate-slide-up" style={{animationDelay: '0.2s'}}>
+            Login
+        </button>
+        {/* <div className="form-footer animate-fade-in" style={{animationDelay: '0.3s'}}>
+          <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
+        </div> */}
+        <div className="social-login animate-fade-in" style={{animationDelay: '0.4s'}}>
+          <p>Or login with:</p>
+          <div className="social-buttons">
+            <button className="social-button google">Google</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
     </>
   );
 };
