@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Menu, CrossIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import GlobalContext from "../../context/GlobalContext";
 
 export default function Navbar() {
-  const [isOpen, setOpen] = useState(false);
+  const {isOpen} = useContext(GlobalContext);
+  const {setOpen} = useContext(GlobalContext);
+  console.log(isOpen);
+  
 
   return (
     <nav className={`${isOpen ? "navbar_expand" : "navbar_normal"} navbar`}>

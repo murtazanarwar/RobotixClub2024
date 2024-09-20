@@ -9,12 +9,15 @@ import Footer from "./components/Footer/Footer"
 import About from './components/About/About';
 
 import './App.css'
+import ContextProvider from './context/ContextProvider';
 
 function App() {
   return (
     <>
       <Router>
-        <Navbar />
+        <ContextProvider>
+          <Navbar />
+        </ContextProvider>
         <div>
           <main>
             <Routes>
