@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { signup } from '../../api/authApi';
+import "./signup.css"
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -29,7 +30,7 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div className='signup'>
       <h2>Signup</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
