@@ -23,7 +23,6 @@ import { TextPlugin } from "gsap/TextPlugin";
 
 
 
-
 function Home() {
 
   console.clear();
