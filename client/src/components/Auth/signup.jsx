@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { signup } from '../../api/authApi';
 import "./signup.css"
 
@@ -9,6 +10,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ const Signup = () => {
       const response = await signup({ username, email, password });
       setSuccess('Signup successful!');
       setError('');
+      navigate('/home'); 
       // console.log(response.data);
     } catch (error) {
       setError('Signup failed: ' + error.message);

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../api/authApi';
 import "./login.css"
 
@@ -7,6 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const Login = () => {
         localStorage.setItem('token', response.data.token);
         setSuccess('Login successful!');
         setError('');
+        navigate('/home');
         // console.log('Token saved:', response.data.token);
       } else {
         setError('No token received');
