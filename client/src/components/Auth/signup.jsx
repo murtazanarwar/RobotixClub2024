@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { signup } from '../../api/authApi';
-import "./signup.css"
+import "./Signup.css"
 
-const Signup = () => {
+export default function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,20 +11,37 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    // console.log({ username, email, password })
+
+    // Reset messages
+    setError('');
+    setSuccess('');
+
+    // Basic validation
+    if (!username || !email || !password || !confirmPassword) {
+      setError('All fields are required');
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
     try {
-      const response = await signup({ username, email, password });
-      setSuccess('Signup successful!');
-      setError('');
-      // console.log(response.data);
+      // Here you would typically make an API call to your backend
+      // For this example, we'll simulate an API call with a delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Simulating a successful signup
+      setSuccess('Signup successful! Welcome aboard!');
+
+      // Clear form fields after successful signup
+      setUsername('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
     } catch (error) {
-      setError('Signup failed: ' + error.message);
-      setSuccess('');
+      setError('Signup failed. Please try again.');
     }
   };
 
@@ -63,6 +79,4 @@ const Signup = () => {
       </form>
     </div>
   );
-};
-
-export default Signup;
+}

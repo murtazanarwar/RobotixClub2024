@@ -2,3 +2,9 @@
     min-height: 50vh;
     background: #e6b030;
 }
+
+.blogsec {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
