@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/Auth/login'
-import Signup from './components/Auth/signup'
+import Login from './components/Auth/login/login'
+import Signup from './components/Auth/signup/signup'
 import Navbar from './components/Navbar/Navbar';
 import Home from "./components/Home/Home"
 import Robofest from './components/Robofest/Robofest';
@@ -22,20 +22,15 @@ function App() {
         <div>
           <main>
             <Routes>
-              {/* <Route path="/" element={<Home />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/project" element={<Projects />} />
-              <Route path="/teams" element={<TeamPage />} /> */}
-
-              <Route path="/" element={<Signup />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/robofest" element={<Robofest />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/blog" element={<Blog />} />
+              {/* <Route path="/about" element={<About />} /> */}
+              {/* <Route path="/robofest" element={<Robofest />} /> */}
             </Routes>
           </main>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     </>

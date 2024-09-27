@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../api/authApi';
+import { login } from '../../../api/authApi';
 import { Link } from 'react-router-dom';
 import "./login.css"
 
@@ -22,7 +22,7 @@ const Login = () => {
         localStorage.setItem('token', response.data.token);
         setSuccess('Login successful!');
         setError('');
-        navigate('/home');
+        navigate('/');
         // console.log('Token saved:', response.data.token);
       } else {
         setError('No token received');
