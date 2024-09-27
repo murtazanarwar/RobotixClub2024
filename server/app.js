@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const cors = require('cors');
+let dotenv = require("dotenv").config();
 
 const app = express();
 
@@ -21,10 +22,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true
-  }));
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -41,8 +42,10 @@ app.get('/', (req, res) => {
 console.log(process.env.MONGO_URI);
 
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.log(err));
+mongoose.connect(process.env.MONGO_URI, {
+  dbName: "myapp"
+})
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 
 module.exports = app;

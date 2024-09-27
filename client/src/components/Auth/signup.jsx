@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { signup } from '../../api/authApi';
 import "./signup.css"
 
-const Signup = () => {
+export default function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,21 +14,32 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    // console.log({ username, email, password })
+
+    // Reset messages
+    setError('');
+    setSuccess('');
+
+    // Basic validation
+    if (!username || !email || !password || !confirmPassword) {
+      setError('All fields are required');
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
     try {
+      // Here you would typically make an API call to your backend
+      // For this example, we'll simulate an API call with a delay
       const response = await signup({ username, email, password });
       setSuccess('Signup successful!');
       setError('');
       navigate('/home'); 
       // console.log(response.data);
     } catch (error) {
-      setError('Signup failed: ' + error.message);
-      setSuccess('');
+      setError('Signup failed. Please try again.');
     }
   };
 
@@ -66,6 +77,4 @@ const Signup = () => {
       </form>
     </div>
   );
-};
-
-export default Signup;
+}
