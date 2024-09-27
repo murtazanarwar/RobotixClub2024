@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import "./BlogPost.css"; 
 
+<<<<<<< HEAD
 import { createPost } from "../../../api/postApi"
+=======
+import {createPost} from "../../../api/postApi"
+>>>>>>> 9f1dd7bf63bb3ab00b95fae173918ffdd2bd1192
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
