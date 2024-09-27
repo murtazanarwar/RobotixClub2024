@@ -10,6 +10,7 @@ import About from './components/About/About';
 
 import './App.css'
 import ContextProvider from './context/ContextProvider';
+import { Blog } from './components/blog/Blog';
 
 function App() {
   return (
@@ -21,16 +22,17 @@ function App() {
         <div>
           <main>
             <Routes>
-              <Route path="/about" element={<About />} />
               {/* <Route path="/" element={<Home />} />
               <Route path="/events" element={<Events />} />
               <Route path="/project" element={<Projects />} />
               <Route path="/teams" element={<TeamPage />} /> */}
 
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Signup />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/about" element={<About />} />
               <Route path="/robofest" element={<Robofest />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+              <Route path="/blog" element={<Blog />} />
             </Routes>
           </main>
           <Footer />

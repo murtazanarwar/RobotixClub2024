@@ -19,10 +19,11 @@ export default function Navbar() {
           <Link to="/">HOME</Link>
           <Link to="/about">ABOUT</Link>
           {/* <Link to="/events">EVENT</Link>
-      <Link to="/project">PROJECT</Link>
-      <Link to="/teams">TEAM</Link> */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">SignUp</Link>
+              <Link to="/project">PROJECT</Link>
+              <Link to="/teams">TEAM</Link> */}
+          <Link to="/login">LOGIN</Link>
+          <Link to="/signup">SIGN UP</Link>
+          <Link to="/blog">BLOG</Link>
         </div></div>
 
       {isOpen ? (

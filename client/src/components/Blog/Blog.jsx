@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { createPost, getPost, updatePost, deletePost, getAllPosts } from '../../api/postApi';
 import PostForm from '../Posts/PostForm';
 import PostList from "../Posts/PostList"
-import "./Blog.css"
+import BlogPost from "../Blog/BlogPost/BlogPost"
 
 import BlogCard from '../Blog/BlogCard/BlogCard';
 
@@ -68,6 +68,9 @@ export const Blog = () => {
 
             {/* <div className="postBlog"></div> */}
             {/* <PostForm createPost={handleCreatePost} /> */}
+            <div className="postBlog"></div>
+            {/* <PostForm createPost={handleCreatePost} /> */}
+            <BlogPost />
             {/* <PostList posts={posts} updatePost={handleUpdatePost} deletePost={handleDeletePost} /> */}
         </div>
     );
