@@ -179,7 +179,7 @@ function Home() {
         </div>
       </div>
       <Robofest />
-      {/* <Blog /> */}
+      <Blog />
     </>
   );
 }
