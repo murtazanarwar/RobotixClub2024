@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '../../api/authApi';
+import { Link } from 'react-router-dom';
 import "./signup.css"
 
 const Signup = () => {
@@ -35,8 +36,8 @@ const Signup = () => {
   return (
     <div className='signup'>
       <h2>Signup</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
+      {/* {error && <p style={{ color: 'red' }}>{error}</p>}
+      {success && <p style={{ color: 'green' }}>{success}</p>} */}
       <form onSubmit={handleSignup}>
         <input
           type="text"
@@ -64,6 +65,9 @@ const Signup = () => {
         />
         <button type="submit">Signup</button>
       </form>
+      <div>
+        Already have an account? <Link to="/login">Log in</Link>
+      </div>
     </div>
   );
 };

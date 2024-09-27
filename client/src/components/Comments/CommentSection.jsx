@@ -58,43 +58,92 @@ function CommentSection({ postId }) {
   };
 
   return (
-    <div>
-      <h3>Comments</h3>
-      
-      <form onSubmit={handleAddComment}>
+        <div className="space-y-6">
+      <h3 className="text-lg font-semibold text-gray-800">Comments</h3>
+
+      {/* Add Comment Form */}
+      <form onSubmit={handleAddComment} className="space-y-4">
         <textarea
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
           placeholder="Add a comment"
           value={newComment.content}
           onChange={(e) => setNewComment({ ...newComment, content: e.target.value })}
+          rows="3"
         />
         <input
           type="text"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
           placeholder="Author ID"
           value={newComment.author}
           onChange={(e) => setNewComment({ ...newComment, author: e.target.value })}
         />
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+        >
+          Submit
+        </button>
       </form>
 
+      {/* Comments List */}
       {comments.map((comment) => (
-        <div key={comment._id}>
+        <div
+          key={comment._id}
+          className="p-4 bg-gray-50 rounded-md border border-gray-200 space-y-2"
+        >
           {editingCommentId === comment._id ? (
-            <form onSubmit={handleUpdateComment}>
+            <form onSubmit={handleUpdateComment} className="space-y-2">
               <textarea
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={updatedComment.content}
                 onChange={(e) => setUpdatedComment({ content: e.target.value })}
+                rows="3"
               />
-              <button type="submit">Update</button>
-              <button onClick={() => setEditingCommentId(null)}>Cancel</button>
+              <div className="space-x-2">
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                >
+                  Update
+                </button>
+                <button
+                  type="button"
+                  className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                  onClick={() => setEditingCommentId(null)}
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           ) : (
             <>
-              <p>{comment.content}</p>
-              <p><strong>Author: {comment.author?.name}</strong></p>
-              <p>Likes: {comment.likes}</p>
-              <button onClick={() => handleLike(comment._id)}>Like</button>
-              <button onClick={() => handleEditComment(comment._id, comment.content)}>Edit</button>
-              <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
+              <p className="text-gray-700">{comment.content}</p>
+              <p className="text-sm text-gray-600">
+                <strong>Author: {comment.author?.name}</strong>
+              </p>
+              <p className="text-sm text-gray-600">Likes: {comment.likes}</p>
+
+              {/* Action Buttons */}
+              <div className="space-x-2">
+                <button
+                  className="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
+                  onClick={() => handleLike(comment._id)}
+                >
+                  Like
+                </button>
+                <button
+                  className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  onClick={() => handleEditComment(comment._id, comment.content)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                  onClick={() => handleDeleteComment(comment._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </>
           )}
         </div>

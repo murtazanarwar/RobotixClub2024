@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../api/authApi';
+import { Link } from 'react-router-dom';
 import "./login.css"
 
 const Login = () => {
@@ -70,6 +71,9 @@ const Login = () => {
           <div className="social-buttons">
             <button className="social-button google">Google</button>
           </div>
+        </div>
+        <div>
+          New User? <Link to="/">Sign Up</Link>
         </div>
       </form>
     </div>

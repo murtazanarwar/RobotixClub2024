@@ -6,6 +6,7 @@ import PostList from "../Posts/PostList"
 
 export const Blog = () => {
     const [posts, setPosts] = useState([]);
+    const [showPostForm, setShowPostForm] = useState(false);
 
     useEffect(() => {
         getAllPosts()
@@ -31,6 +32,10 @@ export const Blog = () => {
             .catch((error) => console.log(error));
     };
 
+    const handleCreatePostClick = () => {
+        setShowPostForm(true);
+    }
+
     return (
         <div className='blogs'>
             <h1>Blog Application</h1>
@@ -39,8 +44,9 @@ export const Blog = () => {
             })}
 
             <div className="postBlog"></div>
-            <PostForm createPost={handleCreatePost} />
-            {/* <PostList posts={posts} updatePost={handleUpdatePost} deletePost={handleDeletePost} /> */}
+            { !showPostForm && <button onClick = {handleCreatePostClick}>CREATE YOUR BLOG</button>}
+            { showPostForm &&  <PostForm createPost={handleCreatePost} /> }
+            <PostList posts={posts} updatePost={handleUpdatePost} deletePost={handleDeletePost} />
         </div>
     );
 }

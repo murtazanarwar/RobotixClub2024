@@ -4,7 +4,6 @@ import React, { memo, useState, useEffect } from 'react';
 import { useRef } from "react";
 
 import "./Home.css"
-import { Blog } from '../blog/Blog';
 import Robofest from '../Robofest/Robofest';
 import { gsap } from "gsap";
 
