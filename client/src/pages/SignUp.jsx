@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 // import "../styles/SignUp.css"
 import { signInFailure, signInSuccess } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../recoil/atom';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -14,6 +16,7 @@ export default function Signup() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
+  const setUser = useSetRecoilState(userState);
 
   const [userId, setUserid] = useState()
 
@@ -36,7 +39,8 @@ export default function Signup() {
       const response = await signup({ username, email, password });
       setSuccess('Signup successful!');
       setError('');
-      navigate('/')
+      setUser(response.data);
+      navigate('/');
       // console.log(response.data);
     } catch (error) {
       setError('Signup failed. Please try again.');

@@ -1,12 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { createComment, getCommentsForPost, editComment, deleteComment, likeComment } from '../api/commentApi';
+import { getUser } from '../api/userApi';
+import { userState } from '../recoil/atom';
+import { useRecoilValue } from 'recoil';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function CommentSection({ postId }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({ content: '', author: '' });
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [updatedComment, setUpdatedComment] = useState({ content: '' });
+  const [authorNames, setAuthorNames] = useState({});
+  const user = useRecoilValue(userState);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchAuthorNames = async () => {
+      const namesMap = { ...authorNames };
+      
+      await Promise.all(
+        comments.map(async (comment) => {
+          if (!namesMap[comment._id]) {
+            try {
+              const response = await getUser(comment.author);
+              namesMap[comment._id] = response.data.username;
+            } catch (error) {
+              console.log(error);
+              namesMap[comment._id] = 'Unknown Author';
+            }
+          }
+        })
+      );
+      
+      setAuthorNames(namesMap);
+    };
+
+    fetchAuthorNames();
+  }, [comments]);
+  
   useEffect(() => {
     getCommentsForPost(postId)
       .then((response) => setComments(response.data))
@@ -15,7 +46,14 @@ function CommentSection({ postId }) {
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    createComment({ ...newComment, post: postId })
+
+    if (!user || !user._id) {
+      console.log("User is not logged in or user ID is not available.");
+      navigate('/log-in')
+      return;
+    }
+
+    createComment({ ...newComment, author: user._id, post: postId })
       .then((response) => setComments([...comments, response.data]))
       .catch((error) => console.log(error));
     setNewComment({ content: '', author: '' });
@@ -71,18 +109,18 @@ function CommentSection({ postId }) {
           onChange={(e) => setNewComment({ ...newComment, content: e.target.value })}
           rows="4"
         />
-        <input
+        {/* <input
           type="text"
           className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-yellow-500 placeholder-opacity-100"
           placeholder="Author ID"
           value={newComment.author}
           onChange={(e) => setNewComment({ ...newComment, author: e.target.value })}
-        />
+        /> */}
         <button
           type="submit"
           className="w-full px-4 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200 shadow-md"
         >
-          Submit
+          Comment
         </button>
       </form>
 
@@ -118,14 +156,12 @@ function CommentSection({ postId }) {
             </form>
           ) : (
             <>
-              {/* Comment Content */}
               <p className="text-gray-800 dark:text-gray-300 text-base">{comment.content}</p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                <strong>Author: {comment.author?.name}</strong>
+                <strong>Author: {authorNames[comment._id]}</strong>
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">Likes: {comment.likes}</p>
 
-              {/* Action Buttons */}
               <div className="space-x-3">
                 <button
                   className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200"
