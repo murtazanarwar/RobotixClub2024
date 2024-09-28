@@ -12,6 +12,7 @@ function CommentSection({ postId }) {
   const [updatedComment, setUpdatedComment] = useState({ content: '' });
   const [authorNames, setAuthorNames] = useState({});
   const user = useRecoilValue(userState);
+  console.log("user: " + user)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,7 +54,7 @@ function CommentSection({ postId }) {
       return;
     }
 
-    createComment({ ...newComment, author: user._id, post: postId })
+    createComment({ ...newComment, author: user.userId, post: postId })
       .then((response) => setComments([...comments, response.data]))
       .catch((error) => console.log(error));
     setNewComment({ content: '', author: '' });

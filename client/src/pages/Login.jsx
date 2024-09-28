@@ -32,7 +32,7 @@ const Login = () => {
         console.log("User state after login:", user);
 
         // Navigate to home or another page after login
-        navigate('/');
+        // navigate('/');
       } else {
         setError('No token received');
       }

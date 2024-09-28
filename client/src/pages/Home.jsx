@@ -17,10 +17,12 @@ import { PixiPlugin } from "gsap/PixiPlugin";
 import { TextPlugin } from "gsap/TextPlugin";
 
 import { useSelector } from 'react-redux';
+import { userState } from '../recoil/atom';
+import { useRecoilValue } from 'recoil';
 
 function Home() {
-
-  console.clear();
+  const user = useRecoilValue(userState);
+  console.log("user: " + user)
   gsap.registerPlugin(Flip, ScrollTrigger, Observer, ScrollToPlugin, Draggable, MotionPathPlugin, EaselPlugin, PixiPlugin, TextPlugin, RoughEase, ExpoScaleEase, SlowMo, CustomEase);
 
   // About Section
