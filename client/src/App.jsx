@@ -16,7 +16,8 @@ import PostPage from './pages/PostPage';
 
 import OnlyAdmin from './components/OnlyAdmin';
 import PrivateRoute from './components/PrivateRoute';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
+import Navbar from './oldComponents/NavbarOld/Navbar';
 import Footer from './components/Footer';
 
 function App() {

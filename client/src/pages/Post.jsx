@@ -13,6 +13,8 @@ export default function Post() {
     getAllPosts()
         .then((response) => setRecentPost(response.data))
         .catch((error) => console.log(error));
+    
+        recentPosts.slice(0,5);
   }, []);
 
   // const handleShowMore = async () => { }

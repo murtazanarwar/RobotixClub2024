@@ -1,6 +1,6 @@
 .signup h2 {
     margin: 0;
-    padding-top: 100px;
+    /* padding-top: 100px; */
 
 }
 
@@ -10,6 +10,7 @@
     --dark-gray: #222222;
     --light-gray: #444444;
 }
+
 /* 
 body,
 html {
@@ -24,13 +25,22 @@ html {
 } */
 
 .signup {
-    width: 100%;
-    max-width: 400px;
-    padding: 2rem;
+    /* margin-top: 100px; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signupWrap {
     background-color: var(--dark-gray);
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
     animation: fadeIn 0.5s ease-out;
+    /* min-width: 400px; */
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
 }
 
 @keyframes fadeIn {
@@ -66,11 +76,12 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
+    margin-top: 1rem;
 }
 
-input {
+.signup input {
     margin-bottom: 1rem;
-    padding: 0.75rem;
+    padding: 0.5rem;
     border: 2px solid var(--golden-yellow);
     background-color: var(--light-gray);
     color: var(--golden-yellow);
@@ -79,17 +90,17 @@ input {
     transition: all 0.3s ease;
 }
 
-input::placeholder {
+.signup input::placeholder {
     color: rgba(255, 215, 0, 0.5);
 }
 
-input:focus {
+.signup input:focus {
     outline: none;
     box-shadow: 0 0 10px var(--golden-yellow);
     transform: scale(1.02);
 }
 
-button {
+.signup button {
     width: 60%;
     margin: 1rem auto 0;
     padding: 0.75rem;
@@ -104,31 +115,54 @@ button {
     /* animation: pulse 2s infinite; */
 }
 
-button:hover {
+.signup button:hover {
     background-color: #FFF700;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
 }
 
-button:active {
+.signup button:active {
     transform: translateY(0);
     box-shadow: 0 2px 5px rgba(255, 215, 0, 0.4);
 }
 
-p {
+.signup p {
     text-align: center;
     margin-top: 1rem;
     font-size: 0.9rem;
 }
 
-p[style*="color: red"] {
+.signup p[style*="color: red"] {
     color: #FF6B6B !important;
     /* animation: shake 0.5s ease-in-out; */
 }
 
-p[style*="color: green"] {
+.signup p[style*="color: green"] {
     color: #4CAF50 !important;
     /* animation: bounce 0.5s ease-in-out; */
+}
+
+.haveAcc {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+.haveAcc span {
+    color: #848181;
+}
+
+.haveAcc a {
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    padding: 5px 0.8rem;
+    transition: all 0.5s;
+}
+
+.haveAcc a:hover {
+    background: #FFD700;
+    color: #000000;
 }
 
 @media (max-width: 480px) {
