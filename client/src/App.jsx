@@ -34,11 +34,11 @@ function App() {
             <Route path = "/dashboard" element = {<Dashboard />}></Route>
           </Route>
           <Route element = {<OnlyAdmin/>}>
-            <Route path = "blog/create-post" element = {<CreatePost />}></Route>
-            <Route path = "blog/update-post/:postId" element = {<UpdatePost />}></Route>
+            <Route path = "/create-post" element = {<CreatePost />}></Route>
+            <Route path = "/update-post/:postId" element = {<UpdatePost />}></Route>
           </Route>  
-          <Route path = "blog/post" element = {<Post />}></Route>
-          <Route path = "blog/post/:postId" element = {<PostPage />}></Route>
+          <Route path = "/post" element = {<Post />}></Route>
+          <Route path = "/post/:postId" element = {<PostPage />}></Route>
         </Routes>
       </main>
       <Footer />

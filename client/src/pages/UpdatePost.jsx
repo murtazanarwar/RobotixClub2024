@@ -1,162 +1,107 @@
-import React, { useEffect } from 'react'
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import{TextInput,Select,FileInput, Alert} from 'flowbite-react'
-import { useState} from 'react';
-import {getStorage, getDownloadURL, uploadBytesResumable,ref } from 'firebase/storage'
-import {app} from '../firebase'
-import {useNavigate,useParams} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { deletePost, getPost, updatePost } from '../api/postApi';
 
 export default function UpdatePost() {
   const navigate = useNavigate();
-  const [file,setFiles] = useState(null);
-  const [imageUploadProgress, setImageUploadPorgress] = useState(null);
-  const [imageUploadError,setImageUploadError] = useState(null);
-  const [formData,setFormData] = useState({
-    title: '',
-    category: 'uncategorized',
-    content: '',
-    image: ''});
-  const [publishError,setPublishError] = useState(null);
-  const {postId} = useParams();
-  const {currentUser} = useSelector(state => state.user);
+  const { postId } = useParams();
+  const [updatedPost, setUpdatedPost] = useState({ title: '', content: '', author: '', category: '' });
+  const [post, setPost] = useState(null);
+  const [error, setError] = useState(null);
 
-  useEffect(()=>{
-    try {
-        const fetchPost = async () =>{
-            const res = await fetch(`/api/post/getposts?postId=${postId}`);
-            const data = await res.json();
-            if(!res.ok){
-                console.log(data.message);
-                setPublishError(data.message);
-                return;
-            }
-            if(res.ok){
-                setPublishError(null);
-                setFormData(data.posts[0]);
-
-            }
-        }
-        fetchPost();
-    } catch (error) {
-        console.log(error)
-    }
-  },[postId]);
-
-
-  const handleSubmit = async (e) => {
+  const handleUpdatePost = async (e) => {
     e.preventDefault();
-    try{
-      const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`,{
-        method: 'PUT',
-        headers: {
-          'Content-Type' : 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if(!res.ok){
-        setPublishError(data.message);
-        return 
-      }
-      if(res.ok){
-        setPublishError(null);
-        navigate(`/post/${data.slug}`)
-      }
-
-
-    } catch(error){
-      setPublishError("something went wrong");
-    }
-  }
-
-
-  const handleUploadImage = async () => {
     try {
-      if(!file){
-        setImageUploadError('please select an image')
-        return;
+      const response = await updatePost(postId, updatedPost);
+      if (response) {
+        setPost(response.data);
+        navigate(`/post/${postId}`);
       }
-      setImageUploadError(null);
-      setImageUploadPorgress(null);
-      const storage = getStorage(app);
-      const fileName = new Date().getTime() + '-'+ file.name;
-      const storageRef = ref(storage, fileName);
-      const uploadTask = uploadBytesResumable(storageRef,file);
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
-          setImageUploadPorgress(progress.toFixed(0));
-        },
-        (error) => {
-          setImageUploadError("Image Upload Failed")
-          setImageUploadPorgress(null);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
-            setImageUploadPorgress(null);
-            setImageUploadError(null);
-            setFormData({...formData,image: downloadURL});
-          })
-        }
-      )
-      
     } catch (error) {
-      setImageUploadError("image upload failed");
-      setImageUploadPorgress(null);
-      console.log(error);
+      console.log('Error updating post:', error);
     }
   };
 
+  const handleDeletePost = async () => {
+    try {
+      await deletePost(postId);
+      navigate('/');
+    } catch (error) {
+      console.log('Error deleting post:', error);
+    }
+  };
 
+  useEffect(() => {
+    getPost(postId)
+      .then((response) => {
+        setPost(response.data);
+        setUpdatedPost({
+          title: response.data.title,
+          content: response.data.content,
+          author: response.data.author,
+          category: response.data.category,
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching post:', error);
+        setError('Failed to fetch post details');
+      });
+  }, [postId]);
+
+  if (!post) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="min-h-screen max-w-4xl flex flex-col mx-auto justify-start items-center my-2">
-      <h1 className="font-semibold text-3xl">Update A Post</h1>
-      <form action="" className="flex flex-col gap-4 w-full my-10">
-        <div className="flex flex-col gap-4 mx-1  sm:flex-row justify-between">
-          <TextInput type='text' placeholder='Title' required id = 'title' className='flex-1' onChange={(e)=>setFormData({...formData,title: e.target.value})} value = {formData.title}></TextInput>
-          <Select
-            onChange={(e)=>{
-              setFormData({...formData,category: e.target.value})
-            }}
-            value={formData.category}
-          >
-            <option value="uncategorized">Select a Category</option>
-            <option value="raipur">Raipur</option>
-            <option value="bilaspur">Bilaspur</option>
-          </Select>
-        </div>
-        <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-5 my-2 mx-1">
-          <FileInput type='file' accept='image/*' className='w-full' onChange={(e)=>setFiles(e.target.files[0])} />
-          <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleUploadImage} disabled={imageUploadProgress}>
-            {
-              imageUploadProgress ? (
-                <div>{imageUploadProgress}%</div>
-              ):
-              "UPLOAD"
-            }
-            </button>
-        </div>
-        {imageUploadError && 
-        <Alert className='bg-red-500 mx-2'>
-            {imageUploadError}
-        </Alert>}
-        {formData.image && (
-          <img src={formData.image} alt="upload" className='w-full h-100 object-cover'/>
-        )}
-        <ReactQuill theme="snow" value={formData.content} placeholder='Write Something' className='h-96 mb-12 mx-2' required
-          onChange={(value) => {
-            setFormData({...formData,content: value});
-          }}
+    <>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form onSubmit={handleUpdatePost} className="max-w-lg mx-auto p-4 bg-white shadow-md rounded">
+        <input
+          type="text"
+          placeholder="Title"
+          value={updatedPost.title}
+          onChange={(e) => setUpdatedPost({ ...updatedPost, title: e.target.value })}
+          className="w-full mb-3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          required
         />
-        <button type='submit' className='text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center my-5 dark:bg-blue-600 dark:hover:bg-blue-700 mx-2 dark:focus:ring-blue-800' onClick={handleSubmit}>UPDATE</button>
-        {
-          publishError && <Alert className='bg-red-500'>{publishError}</Alert>
-        }
+        <input
+          type="text"
+          placeholder="Category"
+          value={updatedPost.category}
+          onChange={(e) => setUpdatedPost({ ...updatedPost, category: e.target.value })}
+          className="w-full mb-3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          required
+        />
+        <textarea
+          placeholder="Content"
+          value={updatedPost.content}
+          onChange={(e) => setUpdatedPost({ ...updatedPost, content: e.target.value })}
+          className="w-full mb-3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          rows="4"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Author Name"
+          value={updatedPost.author}
+          onChange={(e) => setUpdatedPost({ ...updatedPost, author: e.target.value })}
+          className="w-full mb-3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          required
+        />
+        <button
+          type="submit"
+          className="w-full bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600 transition-colors"
+        >
+          Update Post
+        </button>
       </form>
-    </div>
-  )
+
+      <button
+        onClick={handleDeletePost}
+        className="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600 transition-colors mt-4"
+      >
+        Delete Post
+      </button>
+    </>
+  );
 }
