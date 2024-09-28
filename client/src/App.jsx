@@ -16,15 +16,14 @@ import PostPage from './pages/PostPage';
 
 import OnlyAdmin from './components/OnlyAdmin';
 import PrivateRoute from './components/PrivateRoute';
-// import Navbar from './components/Navbar';
-import Navbar from './oldComponents/NavbarOld/Navbar';
+import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <main>
+      <main className="pt-16">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
