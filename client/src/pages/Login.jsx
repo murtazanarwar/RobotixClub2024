@@ -15,6 +15,8 @@ const Login = () => {
   const setUser = useSetRecoilState(userState);
   const user = useRecoilValue(userState); // Access user state for console logging
   const navigate = useNavigate();
+  // console.log(user);
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
