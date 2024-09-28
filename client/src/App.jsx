@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Signup from './pages/SignUp';
 import Login from './pages/Login';
-// import Search from './pages/Search';
+import Search from './pages/Search';
 import Dashboard from './pages/Dashboard';
 import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
@@ -30,7 +30,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/log-in" element={<Login />} />
-          {/* <Route path = "/search" element = {<Search />}></Route> */}
+          <Route path="/search" element={<Search />}></Route>
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />}></Route>
           </Route>
