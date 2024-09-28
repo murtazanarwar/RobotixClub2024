@@ -1,4 +1,4 @@
-* {
+.login-container * {
     margin: 0;
     padding: 0;
 }
@@ -43,7 +43,7 @@ body {
     backdrop-filter: blur(5px);
 }
 
-h2 {
+.login-container h2 {
     text-align: center;
     color: var(--primary-color);
     margin-bottom: 1.5rem;
@@ -54,14 +54,14 @@ h2 {
     margin-bottom: 1.5rem;
 }
 
-label {
+.login-container label {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--text-color);
     font-size: 0.9rem;
 }
 
-input {
+.login-container input {
     width: 100%;
     padding: 0.75rem;
     background-color: var(--input-background);
@@ -72,7 +72,7 @@ input {
     transition: all 0.3s ease;
 }
 
-input:focus {
+.login-container input:focus {
     outline: none;
     box-shadow: 0 0 0 2px var(--primary-color);
 }
@@ -111,12 +111,12 @@ input:focus {
 }
 
 .social-login {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     text-align: center;
 }
 
 .social-login p {
-    margin-bottom: 1rem;
+    margin: 0.7rem 0;
     color: var(--text-color);
     font-size: 0.9rem;
 }
@@ -142,6 +142,29 @@ input:focus {
 .google {
     background-color: #db4437;
     color: white;
+}
+
+.newSignUp {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    align-items: center;
+}
+
+.newSignUp span {
+    color: #848181;
+}
+
+.newSignUp a {
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    padding: 5px 0.8rem;
+    transition: all 0.5s;
+}
+
+.newSignUp a:hover {
+    background: #FFD700;
+    color: #000000;
 }
 
 /* Animations */

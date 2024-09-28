@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/authApi';
 import { Link } from 'react-router-dom';
-import '../styles/Login.css'
+import "../styles/Login.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { signInSuccess, signInFailure } from '../redux/user/userSlice';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const navigate = useNavigate();
+  
+  const [userId, setUserid] = useState();
+  const [username, setUsername] = useState();
+
+  const dispatch = useDispatch(null);
+  const navigate = useNavigate(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
       const response = await login({ email, password });
 
@@ -21,16 +28,24 @@ const Login = () => {
         localStorage.setItem('token', response.data.token);
         setSuccess('Login successful!');
         setError('');
+        setUserid(response.data.userId)
+        setUsername(response.data.username)
         navigate('/');
         // console.log('Token saved:', response.data.token);
+
       } else {
         setError('No token received');
+        console.log('err');
+
       }
     } catch (error) {
       setError('Login failed: ' + (error.response?.data?.message || error.message));
       setSuccess('');
+      signInFailure('failed')
+
     }
   };
+  dispatch(signInSuccess([userId, username ]))
 
   return (
     <>
