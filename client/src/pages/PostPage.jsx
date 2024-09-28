@@ -42,27 +42,49 @@ export default function PostPage() {
   )
   
   return (
-    <main className='p-3 flex flex-col max-w-8xl mx-auto min-h-screen'>
-        <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-7xl mx-auto lg:text-4xl'>{post && post.title} </h1>
-        <div className='self-center mt-5'>
-            <button type="button" className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">{post && post.category}</button>
+    <main className="p-4 flex flex-col max-w-7xl mx-auto min-h-screen">
+      <h1 className="text-3xl mt-10 p-3 bg-yellow-500 rounded-lg text-center lg:text-5xl text-gray-900">
+        {post && post.title}
+      </h1>
+
+      <div className="self-center mt-6">
+        <button
+          type="button"
+          className="text-gray-900 bg-yellow-500 border border-black focus:outline-none hover:bg-yellow-600 focus:ring-4 focus:ring-gray-100 font-medium rounded-md text-sm px-6 py-3"
+        >
+          {post && post.category}
+        </button>
+      </div>
+
+      <img
+        src={post && post.imageUrl}
+        alt={post && post.title}
+        className="mt-10 p-3 max-h-[600px] w-full max-w-7xl self-center object-cover rounded-lg shadow-md"
+      />
+
+      <div className="flex justify-end p-4 border-b border-slate-500 mx-auto w-full max-w-7xl text-xs text-yellow-500">
+        <span>
+          {post && new Date(post.updatedAt).toLocaleDateString()} -{" "}
+          {post && (post.content.length / 1000).toFixed(0)} mins read
+        </span>
+      </div>
+
+      <div
+        className="p-4 text-lg leading-relaxed text-white"
+        dangerouslySetInnerHTML={{ __html: post && post.content }}
+      ></div>
+
+      <CommentSection postId={post._id} />
+
+      <div className="flex flex-col justify-center items-center my-8">
+        <h1 className="text-xl mt-5 text-yellow-500">Recents</h1>
+        <div className="flex flex-wrap mt-5 max-w-7xl justify-center">
+          {recentPosts &&
+            recentPosts.map((recentPost) => (
+              <PostCard key={recentPost._id} post={recentPost} />
+            ))}
         </div>
-        <img src={post && post.imageUrl} alt={post && post.title} className='mt-10 p-3 max-h-[600] w-full max-w-7xl self-center object-cover'/>
-        <div className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-7xl text-xs ">
-            <span className='italic'>{post && new Date(post.updatedAt).toLocaleDateString()} - {post && (post.content.length/1000).toFixed(0)} mins read</span>
-        </div>
-        <div className='p-3 text-2xl max-w-7xl mx-auto w-full post-content' dangerouslySetInnerHTML={{__html:post && post.content}}></div>
-        <CommentSection postId={post._id}/>
-        <div className='flex flex-col justify-center items-center mb-5'>
-          <h1 className='text-xl mt-5'>Recents</h1>
-          <div className="flex flex-wrap mt-5 max-w-7xl">
-            {
-              recentPosts && recentPosts.map((post) => (
-                <PostCard key={post._id} post={post} />
-              ))
-            }
-          </div>
-        </div>
+      </div>
     </main>
   )
 }

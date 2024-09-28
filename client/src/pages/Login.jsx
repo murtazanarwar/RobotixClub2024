@@ -74,7 +74,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-yellow-500 text-white font-semibold py-2 rounded-md hover:bg-yellow-600 transition duration-300 transform-gpu animate-slide-up"
+            className="w-full bg-yellow-500 text-white font-semibold py-2 rounded-md hover:bg-yellow-600 transition duration-300"
             style={{ animationDelay: '0.2s' }}
           >
             Login

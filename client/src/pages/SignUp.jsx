@@ -36,7 +36,7 @@ export default function Signup() {
       const response = await signup({ username, email, password });
       setSuccess('Signup successful!');
       setError('');
-      navigate('/log-in')
+      navigate('/')
       // console.log(response.data);
     } catch (error) {
       setError('Signup failed. Please try again.');

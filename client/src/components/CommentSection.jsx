@@ -58,28 +58,29 @@ function CommentSection({ postId }) {
   };
 
   return (
-      <div className="space-y-6">
-      <h3 className="text-lg font-semibold text-gray-800">Comments</h3>
+    <div className="space-y-8">
+      {/* Comments Heading */}
+      <h3 className="text-xl font-bold text-gray-900 dark:text-yellow-500">Comments</h3>
 
       {/* Add Comment Form */}
-      <form onSubmit={handleAddComment} className="space-y-4">
+      <form onSubmit={handleAddComment} className="space-y-4 bg-gray-100 dark:bg-gray-800 p-5 rounded-lg shadow-md">
         <textarea
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-yellow-500 placeholder-opacity-100"
           placeholder="Add a comment"
           value={newComment.content}
           onChange={(e) => setNewComment({ ...newComment, content: e.target.value })}
-          rows="3"
+          rows="4"
         />
         <input
           type="text"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-yellow-500 placeholder-opacity-100"
           placeholder="Author ID"
           value={newComment.author}
           onChange={(e) => setNewComment({ ...newComment, author: e.target.value })}
         />
         <button
           type="submit"
-          className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+          className="w-full px-4 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200 shadow-md"
         >
           Submit
         </button>
@@ -89,26 +90,26 @@ function CommentSection({ postId }) {
       {comments.map((comment) => (
         <div
           key={comment._id}
-          className="p-4 bg-gray-50 rounded-md border border-gray-200 space-y-2"
+          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 space-y-3"
         >
           {editingCommentId === comment._id ? (
-            <form onSubmit={handleUpdateComment} className="space-y-2">
+            <form onSubmit={handleUpdateComment} className="space-y-3">
               <textarea
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200"
                 value={updatedComment.content}
                 onChange={(e) => setUpdatedComment({ content: e.target.value })}
                 rows="3"
               />
-              <div className="space-x-2">
+              <div className="space-x-3">
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  className="px-5 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200"
                 >
                   Update
                 </button>
                 <button
                   type="button"
-                  className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                  className="px-5 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200"
                   onClick={() => setEditingCommentId(null)}
                 >
                   Cancel
@@ -117,28 +118,29 @@ function CommentSection({ postId }) {
             </form>
           ) : (
             <>
-              <p className="text-gray-700">{comment.content}</p>
-              <p className="text-sm text-gray-600">
+              {/* Comment Content */}
+              <p className="text-gray-800 dark:text-gray-300 text-base">{comment.content}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 <strong>Author: {comment.author?.name}</strong>
               </p>
-              <p className="text-sm text-gray-600">Likes: {comment.likes}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Likes: {comment.likes}</p>
 
               {/* Action Buttons */}
-              <div className="space-x-2">
+              <div className="space-x-3">
                 <button
-                  className="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
+                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200"
                   onClick={() => handleLike(comment._id)}
                 >
                   Like
                 </button>
                 <button
-                  className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200"
                   onClick={() => handleEditComment(comment._id, comment.content)}
                 >
                   Edit
                 </button>
                 <button
-                  className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200"
                   onClick={() => handleDeleteComment(comment._id)}
                 >
                   Delete
