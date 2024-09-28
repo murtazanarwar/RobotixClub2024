@@ -16,6 +16,8 @@ import { EaselPlugin } from "gsap/EaselPlugin";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import { TextPlugin } from "gsap/TextPlugin";
 
+import { useSelector } from 'react-redux';
+
 function Home() {
 
   console.clear();
@@ -107,6 +109,8 @@ function Home() {
     });
   }
 
+  const userstate = useSelector(state => state);
+  // console.log(userstate);
   return (
     <>
       <div className="overflow-hidden body">

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signup } from '../api/authApi';
+import { login, signup } from '../api/authApi';
 import { Link } from 'react-router-dom';
+import "../styles/SignUp.css"
+import { signInFailure, signInSuccess } from '../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -12,6 +15,8 @@ export default function Signup() {
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
+  const [userId, setUserid] = useState()
+  
   const handleSignup = async (e) => {
     e.preventDefault();
     setError('');
@@ -31,12 +36,13 @@ export default function Signup() {
       const response = await signup({ username, email, password });
       setSuccess('Signup successful!');
       setError('');
-      navigate('/'); 
+      navigate('/log-in')
       // console.log(response.data);
     } catch (error) {
       setError('Signup failed. Please try again.');
     }
   };
+
 
   return (
     <div className="max-w-md mx-auto bg-gray-900 p-8 mt-10 rounded-lg shadow-lg">

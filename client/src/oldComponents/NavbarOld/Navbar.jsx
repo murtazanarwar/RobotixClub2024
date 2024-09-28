@@ -2,13 +2,13 @@ import { useState, useContext } from "react";
 import { Menu, CrossIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import GlobalContext from "../../context/GlobalContext";
+// import GlobalContext from "../../context/GlobalContext";
+import { useSelector } from 'react-redux'
 
 export default function Navbar() {
-  const {isOpen} = useContext(GlobalContext);
-  const {setOpen} = useContext(GlobalContext);
-  console.log(isOpen);
-  
+  const [isOpen, setOpen] = useState(false);
+  const userLogged = localStorage.getItem('token')
+
 
   return (
     <nav className={`${isOpen ? "navbar_expand" : "navbar_normal"} navbar`}>
@@ -21,9 +21,13 @@ export default function Navbar() {
           {/* <Link to="/events">EVENT</Link>
               <Link to="/project">PROJECT</Link>
               <Link to="/teams">TEAM</Link> */}
-          <Link to="/login">LOGIN</Link>
-          <Link to="/signup">SIGN UP</Link>
-          <Link to="/blog">BLOG</Link>
+          {!userLogged && (
+            <>
+              <Link to="/log-in">LOGIN</Link>
+              <Link to="/sign-up">SIGN UP</Link>
+            </>
+          )}
+          <Link to="/post">BLOG</Link>
         </div></div>
 
       {isOpen ? (
