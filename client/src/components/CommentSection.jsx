@@ -12,8 +12,9 @@ function CommentSection({ postId }) {
   const [updatedComment, setUpdatedComment] = useState({ content: '' });
   const [authorNames, setAuthorNames] = useState({});
   const user = useRecoilValue(userState);
-  console.log("user: " + user)
   const navigate = useNavigate();
+
+  console.log("user: " + user.userId)
 
   useEffect(() => {
     const fetchAuthorNames = async () => {

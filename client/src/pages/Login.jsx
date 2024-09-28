@@ -13,7 +13,7 @@ const Login = () => {
   const [success, setSuccess] = useState('');
 
   const setUser = useSetRecoilState(userState);
-  const user = useRecoilValue(userState); // Access user state for console logging
+  const user = useRecoilValue(userState);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -22,17 +22,15 @@ const Login = () => {
       const response = await login({ email, password });
 
       if (response.data.token) {
-        // Save the token in localStorage
         localStorage.setItem('token', response.data.token);
+        // localStorage.setItem('user', JSON.stringify(response.data));
         setSuccess('Login successful!');
         setError('');
-        setUser(response.data); // Store user details in Recoil state
+        setUser(response.data);
 
-        // Log the user state after setting it
         console.log("User state after login:", user);
 
-        // Navigate to home or another page after login
-        // navigate('/');
+        navigate('/');
       } else {
         setError('No token received');
       }
