@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     currentUser: null,
-    currentUserID : null
+    currentUserID : null,
+    isAdmin : false
 }
 
 const userSlice = createSlice({
@@ -19,6 +20,9 @@ const userSlice = createSlice({
             state.currentUser = null,
             console.log(action);
             
+        },
+        adminAccess: (state) => {
+            state.isAdmin = true;
         },
         logout: (state) =>{
             state.currentUser = null;
