@@ -14,7 +14,7 @@ function CommentSection({ postId }) {
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
 
-  console.log("user: " + user.userId)
+  console.log("user: " + user)
 
   useEffect(() => {
     const fetchAuthorNames = async () => {
@@ -111,13 +111,6 @@ function CommentSection({ postId }) {
           onChange={(e) => setNewComment({ ...newComment, content: e.target.value })}
           rows="4"
         />
-        {/* <input
-          type="text"
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-yellow-500 placeholder-opacity-100"
-          placeholder="Author ID"
-          value={newComment.author}
-          onChange={(e) => setNewComment({ ...newComment, author: e.target.value })}
-        /> */}
         <button
           type="submit"
           className="w-full px-4 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200 shadow-md"
