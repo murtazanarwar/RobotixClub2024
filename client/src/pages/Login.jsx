@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  
+
   const [userId, setUserid] = useState();
   const [username, setUsername] = useState();
 
@@ -45,7 +45,7 @@ const Login = () => {
 
     }
   };
-  dispatch(signInSuccess([userId, username ]))
+  dispatch(signInSuccess([userId, username]))
 
   return (
     <>
@@ -59,7 +59,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               required
-              className="w-full px-4 py-2 bg-gray-800 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500 placeholder-yellow-500 placeholder-opacity-100"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
             />
           </div>
           <div>
@@ -69,26 +69,26 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               required
-              className="w-full px-4 py-2 bg-gray-800 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500 placeholder-yellow-500 placeholder-opacity-100"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-yellow-500 text-white font-semibold py-2 rounded-md hover:bg-yellow-600 transition duration-300"
+            className="w-full bg-yellow-500 text-white font-semibold py-2 rounded-md hover:bg-yellow-600 transition duration-300 transform-gpu animate-slide-up"
             style={{ animationDelay: '0.2s' }}
           >
             Login
           </button>
 
-          {/* Forgot Password */}
-          {/* <div className="form-footer text-center animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            {/* Forgot Password */}
+            {/* <div className="form-footer text-center animate-fade-in" style={{ animationDelay: '0.3s' }}>
             <a href="/forgot-password" className="text-yellow-500 hover:underline">Forgot Password?</a>
           </div> */}
           <div
-            className="social-login text-center mt-6"
+            className="social-login text-center animate-fade-in mt-6"
             style={{ animationDelay: '0.4s' }}
           >
-            <p className="text-yellow-500">Or login with:</p>
+            <p className="text-gray-600">Or login with:</p>
             <div className="social-buttons mt-4">
               <button
                 className="bg-red-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-red-600 transition duration-300"
