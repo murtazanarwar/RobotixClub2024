@@ -1,5 +1,5 @@
-import NumberAnimation from "../Animation/Animation";
-import "./About.css";
+import NumberAnimation from "../components/Animation/Animation";
+import "../styles/About.css";
 
 function About() {
   return (

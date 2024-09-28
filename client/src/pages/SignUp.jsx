@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signup } from '../../../api/authApi';
+import { signup } from '../api/authApi';
 import { Link } from 'react-router-dom';
-import "./signup.css"
+import "../styles/SignUp.css"
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -15,12 +15,9 @@ export default function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
-    // Reset messages
     setError('');
     setSuccess('');
 
-    // Basic validation
     if (!username || !email || !password || !confirmPassword) {
       setError('All fields are required');
       return;
@@ -32,8 +29,6 @@ export default function Signup() {
     }
 
     try {
-      // Here you would typically make an API call to your backend
-      // For this example, we'll simulate an API call with a delay
       const response = await signup({ username, email, password });
       setSuccess('Signup successful!');
       setError('');

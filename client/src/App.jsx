@@ -1,39 +1,48 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/Auth/login/login'
-import Signup from './components/Auth/signup/signup'
-import Navbar from './components/Navbar/Navbar';
-import Home from "./components/Home/Home"
-import Robofest from './components/Robofest/Robofest';
-import Footer from "./components/Footer/Footer"
-import About from './components/About/About';
 
 import './App.css'
-import ContextProvider from './context/ContextProvider';
-import { Blog } from './components/blog/Blog';
+
+import Home from './pages/Home';
+import About from './pages/About';
+import Signup from './pages/SignUp';
+import Login from './pages/Login';
+import Search from './pages/Search';
+import Dashboard from './pages/Dashboard';
+import CreatePost from './pages/CreatePost';
+import UpdatePost from './pages/UpdatePost';
+import Post from './pages/Post';
+import PostPage from './pages/PostPage';
+
+import OnlyAdmin from './components/OnlyAdmin';
+import PrivateRoute from './components/PrivateRoute';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <>
-      <Router>
-        {/* <ContextProvider>
-          <Navbar />
-        </ContextProvider> */}
-        <div>
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/blog" element={<Blog />} />
-              {/* <Route path="/about" element={<About />} /> */}
-              {/* <Route path="/robofest" element={<Robofest />} /> */}
-            </Routes>
-          </main>
-          {/* <Footer /> */}
-        </div>
-      </Router>
-    </>
+    <Router>
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/sign-up" element={<Signup />} />
+          <Route path="/log-in" element={<Login />} />
+          <Route path = "/search" element = {<Search />}></Route>
+          <Route element = {<PrivateRoute/>}>
+            <Route path = "/dashboard" element = {<Dashboard />}></Route>
+          </Route>
+          <Route element = {<OnlyAdmin/>}>
+            <Route path = "blog/create-post" element = {<CreatePost />}></Route>
+            <Route path = "blog/update-post/:postId" element = {<UpdatePost />}></Route>
+          </Route>  
+          <Route path = "blog/post" element = {<Post />}></Route>
+          <Route path = "blog/post/:postSlug" element = {<PostPage />}></Route>
+        </Routes>
+      </main>
+      <Footer />
+    </Router>
   );
 }
 

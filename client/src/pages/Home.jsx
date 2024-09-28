@@ -1,15 +1,11 @@
 import React, { memo, useState, useEffect } from 'react';
-
-
 import { useRef } from "react";
 
-import "./Home.css"
-import Robofest from '../Robofest/Robofest';
-import { gsap } from "gsap";
+import "../styles/Home.css"
 
+import { gsap } from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { RoughEase, ExpoScaleEase, SlowMo } from "gsap/EasePack";
-
 import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/Observer";
@@ -20,15 +16,10 @@ import { EaselPlugin } from "gsap/EaselPlugin";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import { TextPlugin } from "gsap/TextPlugin";
 
-
-
 function Home() {
 
   console.clear();
   gsap.registerPlugin(Flip, ScrollTrigger, Observer, ScrollToPlugin, Draggable, MotionPathPlugin, EaselPlugin, PixiPlugin, TextPlugin, RoughEase, ExpoScaleEase, SlowMo, CustomEase);
-
-
-
 
   // About Section
 
@@ -40,7 +31,6 @@ function Home() {
   gsap.set(".main_section", {
     autoAlpha: 1
   });
-
 
   // const planet = gsap.timeline({ repeat: 0 });
   // const homePlanet = gsap.timeline({
@@ -178,8 +168,6 @@ function Home() {
           </main>
         </div>
       </div>
-      <Robofest />
-      <Blog />
     </>
   );
 }

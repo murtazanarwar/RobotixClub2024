@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { createComment, getCommentsForPost, editComment, deleteComment, likeComment } from '../../api/commentApi';
+import { createComment, getCommentsForPost, editComment, deleteComment, likeComment } from '../api/commentApi';
 
 function CommentSection({ postId }) {
   const [comments, setComments] = useState([]);
