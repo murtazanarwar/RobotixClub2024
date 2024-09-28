@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 import {useNavigate, useLocation } from 'react-router-dom'
 import PostCard from '../components/PostCard';
+import "../styles/Search.css"
 
 export default function Search() {
     const navigate = useNavigate();
@@ -97,7 +98,7 @@ export default function Search() {
     
 
   return (
-    <div className='flex flex-col md:flex-row'>
+    <div className='search flex flex-col md:flex-row'>
         <div className='p-7 border-t border-b md:border-r md:min-h-screen border-gray-500'>
             <form className='flex flex-col gap-8' onSubmit={handleSubmit}>
                 <div className='flex items-center gap-2'>
