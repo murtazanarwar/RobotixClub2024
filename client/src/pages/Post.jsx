@@ -13,8 +13,6 @@ export default function Post() {
     getAllPosts()
         .then((response) => setRecentPost(response.data))
         .catch((error) => console.log(error));
-    
-        recentPosts.slice(0,5);
   }, []);
 
   // const handleShowMore = async () => { }
@@ -24,7 +22,7 @@ export default function Post() {
     <>
       <main className='p-3 flex flex-col min-h-screen max-w-7x items-center mx-auto'>
           <div className='text-5xl justify-center items-center'>
-            <div className='flex justify-center items-center'>POSTS</div>
+            <div className='flex justify-center items-center'>ROBOTIX CLUB BLOG</div>
             <div className="flex flex-wrap mt-5 max-w-7xl">
               {
                 recentPosts && recentPosts.map((post) => (
