@@ -58,7 +58,7 @@ function CommentSection({ postId }) {
   };
 
   return (
-        <div className="space-y-6">
+      <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-800">Comments</h3>
 
       {/* Add Comment Form */}

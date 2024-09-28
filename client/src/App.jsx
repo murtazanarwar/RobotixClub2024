@@ -38,7 +38,7 @@ function App() {
             <Route path = "blog/update-post/:postId" element = {<UpdatePost />}></Route>
           </Route>  
           <Route path = "blog/post" element = {<Post />}></Route>
-          <Route path = "blog/post/:postSlug" element = {<PostPage />}></Route>
+          <Route path = "blog/post/:postId" element = {<PostPage />}></Route>
         </Routes>
       </main>
       <Footer />
