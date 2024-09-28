@@ -16,9 +16,9 @@ function App() {
   return (
     <>
       <Router>
-        {/* <ContextProvider>
+        <ContextProvider>
           <Navbar />
-        </ContextProvider> */}
+        </ContextProvider>
         <div>
           <main>
             <Routes>

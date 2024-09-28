@@ -21,7 +21,6 @@ import { PixiPlugin } from "gsap/PixiPlugin";
 import { TextPlugin } from "gsap/TextPlugin";
 
 
-
 function Home() {
 
   console.clear();
@@ -179,7 +178,6 @@ function Home() {
         </div>
       </div>
       <Robofest />
-      <Blog />
     </>
   );
 }

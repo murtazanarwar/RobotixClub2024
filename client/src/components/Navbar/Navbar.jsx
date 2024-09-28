@@ -1,39 +1,85 @@
-import { useState, useContext } from "react";
-import { Menu, CrossIcon } from "lucide-react";
-import { Link } from "react-router-dom";
-import "./Navbar.css";
-import GlobalContext from "../../context/GlobalContext";
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import './Navbar.css';
 
-export default function Navbar() {
-  const {isOpen} = useContext(GlobalContext);
-  const {setOpen} = useContext(GlobalContext);
-  console.log(isOpen);
-  
+function Navbar() {
+    const [sticky, setSticky] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
-  return (
-    <nav className={`${isOpen ? "navbar_expand" : "navbar_normal"} navbar`}>
-      <div className="flexbox">
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setSticky(true);
+            } else {
+                setSticky(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
 
-        {!isOpen ? (<h2 className="nav-title">Robotix Club</h2>) : ""}
-        <div className={`${isOpen ? "display-nav" : "displayno"} navbar`}>
-          <Link to="/">HOME</Link>
-          <Link to="/about">ABOUT</Link>
-          {/* <Link to="/events">EVENT</Link>
-              <Link to="/project">PROJECT</Link>
-              <Link to="/teams">TEAM</Link> */}
-          <Link to="/login">LOGIN</Link>
-          <Link to="/signup">SIGN UP</Link>
-          <Link to="/blog">BLOG</Link>
-        </div></div>
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
 
-      {isOpen ? (
-        <CrossIcon
-          onClick={() => setOpen(false)}
-          className="menu_icons cross_icon"
-        />
-      ) : (
-        <Menu onClick={() => setOpen(true)} className="menu_icons" />
-      )}
-    </nav>
-  );
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const navItems = (
+        <>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/about">About</NavLink></li>
+            <li><NavLink to="/events">Events</NavLink></li>
+            <li><NavLink to="/teams">Team</NavLink></li>
+        </>
+    );
+
+    return (
+        <div className={`navbar-container ${sticky ? 'sticky-navbar' : ''}`}>
+            <div className="navbar">
+                <div className="navbar-start">
+                    <NavLink to="/"><a className="logo">Robotix Club</a></NavLink>
+                </div>
+                <div className="navbar-center">
+                    <ul className="nav-menu">
+                        {navItems}
+                    </ul>
+                </div>
+                <div className="navbar-end">
+                    <div className="dropdown" ref={dropdownRef}>
+                        <div className="dropdown-button" onClick={toggleDropdown}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="icon"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M4 6h16M4 12h8m-8 6h16"
+                                />
+                            </svg>
+                        </div>
+                        <ul className={`dropdown-content ${isDropdownOpen ? 'show' : ''}`}>
+                            {navItems}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
+
+export default Navbar;
