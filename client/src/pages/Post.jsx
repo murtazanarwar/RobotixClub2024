@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 
 export default function Post() {
   const [recentPosts,setRecentPost] = useState(null);
+  const [userLogged, setUserlogged] = useState(localStorage.getItem('token'))
   // const [showMore,setShowMore] = useState(true);
   
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function Post() {
   return (
     <>
       <div className='flex items-center justify-end m-4'>
-      {isAdmin ? <button
+      {userLogged ? <button
                 className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200 left-0"
                 onClick={() => handleUpdatePost()}
               >

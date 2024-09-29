@@ -2,15 +2,23 @@ import React, { memo, useEffect, useRef } from 'react';
 import "../styles/Home.css";
 import { gsap } from "gsap";
 import { Flip, ScrollTrigger } from "gsap/all";
-import { useRecoilValue } from 'recoil';
-import { userState } from '../recoil/atom';
+import { useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
+// import { useRecoilValue } from 'recoil';
+// import { userState } from '../recoil/atom';
 
 gsap.registerPlugin(Flip, ScrollTrigger);
 
 function Home() {
   console.clear();
-  const user = useRecoilValue(userState);
-  console.log("user: " + user);
+  // const user = useRecoilValue(userState);
+  
+  const store = useStore();
+  const user = store.getState();
+  // Above 2 line can be replaced by: const user = useSelector(state => state);
+  
+  // console.log(user);
+  // console.log("user: " + user);
 
   const animat = (planet) => {
     planet
@@ -70,7 +78,7 @@ function Home() {
             <div className="about_txt text-justify">
               <h1 className="about_title text-center">ROBOTIX CLUB</h1>
               <p>The Robotix Club of NIT RAIPUR is a vibrant and innovative community that brings together students with a passion for robotics, automation, and technology. Founded on the principles of collaboration, creativity, and hands-on learning, it serves as a dynamic hub where students explore the fascinating world of robotics through various projects, workshops, competitions, and events.</p>
-              </div>
+            </div>
             <div className="about_graphic">
               <svg viewBox="-25 0 1133.51 1133.51">
                 <g>

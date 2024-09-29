@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { createPost, getAllPosts } from '../api/postApi';
-import { userState } from '../recoil/atom';
-import { useRecoilValue } from 'recoil';
+import { useSelector } from 'react-redux'
+// import { userState } from '../recoil/atom';
+// import { useRecoilValue } from 'recoil';
 
 export default function CreatePost() {
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState({ title: '', content: '', author: '', category: '', imageUrl: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const user = useRecoilValue(userState);
+  const user = useSelector(state => state.user);
+  // console.log(user);
+
 
   useEffect(() => {
     getAllPosts()
@@ -21,14 +24,19 @@ export default function CreatePost() {
   }, []);
 
   const handleCreatePost = async (postData) => {
+    console.log(postData);
+    
     // Remove <p> and </p> tags before saving to the database
     const cleanContent = postData.content.replace(/<p>/g, '').replace(/<\/p>/g, '');
-    
+
     const dataToSend = { ...postData, content: cleanContent };
+    console.log(dataToSend);
     
+
     try {
       const response = await createPost(dataToSend);
       setPosts([response.data, ...posts]);
+
       setSuccess('Post created successfully!');
       setError('');
       setPost({ title: '', content: '', author: '', category: '', imageUrl: '' });
@@ -38,12 +46,17 @@ export default function CreatePost() {
       setSuccess('');
     }
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setPost({ ...post, author: user.__id});
-    await handleCreatePost(post);
+    // console.log(user.userid);
+    setPost({ ...post, author: user.userid });
+
+    handleCreatePost(post);
   };
 
+  
   const handleContentChange = (content) => {
     setPost({ ...post, content });
   };
@@ -109,12 +122,12 @@ export default function CreatePost() {
               ],
               toolbar:
                 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-              // skin: 'oxide-dark',        
-              // content_css: 'dark',  //style not working
+              skin: 'oxide-dark',
+              content_css: 'dark',  //style not working
             }}
           />
         </div>
-
+        {/* 
         <input
           type="text"
           placeholder="Author ID"
@@ -122,7 +135,7 @@ export default function CreatePost() {
           onChange={(e) => setPost({ ...post, author: e.target.value })}
           className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 bg-gray-800"
           required
-        />
+        /> */}
 
         <button
           type="submit"
