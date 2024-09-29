@@ -122,11 +122,11 @@ function Home() {
         <div className="main_section">
           <main className="main_content">
             <div id="about" className="about sec">
-              <div className="about_txt">
+              <div className="about_txt text-justify">
                 <h1 className="about_title">
                   ROBOTIX CLUB
                 </h1>
-                <p>The Robotix Club of NIT RAIPUR is a vibrant and innovative community that brings together students with a passion for robotics, automation, and technology. Founded on the principles of collaboration, creativity, and hands-on learning, the club serves as a dynamic hub where students explore the fascinating world of robotics through various projects, workshops, competitions, and events.</p>
+                <p>The Robotix Club of NIT RAIPUR is a vibrant and innovative community that brings together students with a passion for robotics, automation, and technology. Founded on the principles of collaboration, creativity, and hands-on learning, it serves as a dynamic hub where students explore the fascinating world of robotics through various projects, workshops, competitions, and events.</p>
               </div>
               <div className="about_graphic">
                 <svg viewBox="-25 0 1133.51 1133.51">

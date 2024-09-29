@@ -1,14 +1,15 @@
 import React from 'react';
-
+import logoBlack from '../assets/logoBlack.png'
 const Navbar = () => {
   return (
     <div>
       <nav className="bg-amber-400 shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <a href="/" className="text-xl font-bold text-gray-800">
-                ROBOTIX CLUB NITRR
+            <div className="items-center">
+              <a href="/" className="text-xl font-bold text-gray-800 flex flex-row">
+              <img src={logoBlack} alt="Logo" className="w-16 h-16 mx-auto" />
+              <div className="m-5" >Robotix Club NITRR</div>
               </a>
             </div>
             <div className="hidden md:flex md:space-x-8">
