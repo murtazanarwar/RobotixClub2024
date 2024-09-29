@@ -47,6 +47,8 @@ export default function CreatePost() {
     }
   };
 
+  console.log(user);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

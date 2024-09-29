@@ -54,6 +54,7 @@ const Login = () => {
   };
   dispatch(signInSuccess([userId, username]))
   // const user = useSelector(state => state)
+  // console.log(user);
   
 
   return (
