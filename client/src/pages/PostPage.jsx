@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import { Spinner} from 'flowbite-react';
 
 import { getAllPosts, getPost } from '../api/postApi';
@@ -13,8 +13,9 @@ export default function PostPage() {
     const [error,setError] = useState(false);
     const [post,setPost] = useState(null);
     const [recentPosts,setRecentPost] = useState(null);
-    
-    
+    const [isAdmin, setIsAdmin] = useState(true)
+    const navigate = useNavigate();
+
     useEffect(() => {
       getAllPosts()
           .then((response) => setRecentPost(response.data))
@@ -35,6 +36,10 @@ export default function PostPage() {
           });
     }, []);
 
+    const handleUpdatePost = (postId) => {
+      navigate(`/update-post/${postId}`)
+    }
+
   if(loading) return (
     <div className='flex justify-center items-center min-h-screen'>
         <Spinner size = 'xl'></Spinner>
@@ -43,14 +48,14 @@ export default function PostPage() {
   
   return (
     <main className="p-4 flex flex-col max-w-7xl mx-auto min-h-screen">
-      <h1 className="text-3xl mt-10 p-3 bg-yellow-500 rounded-lg text-center lg:text-5xl text-gray-900">
+      <h1 className="text-3xl mt-10 p-3 bg-yellow-600 rounded-lg text-center lg:text-5xl text-white">
         {post && post.title}
       </h1>
 
       <div className="self-center mt-6">
         <button
           type="button"
-          className="text-gray-900 bg-yellow-500 border border-black focus:outline-none hover:bg-yellow-600 focus:ring-4 focus:ring-gray-100 font-medium rounded-md text-sm px-6 py-3"
+          className="text-white bg-yellow-600 border border-black focus:outline-none hover:bg-yellow-600 focus:ring-4 focus:ring-gray-100 font-medium rounded-md text-sm px-6 py-3"
         >
           {post && post.category}
         </button>
@@ -61,6 +66,13 @@ export default function PostPage() {
         alt={post && post.title}
         className="mt-10 p-3 max-h-[600px] w-full max-w-7xl self-center object-cover rounded-lg shadow-md"
       />
+
+      {isAdmin ?       <button
+        className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200"
+        onClick={() => handleUpdatePost(post._id)}
+      >
+        Update Post
+      </button> : <div></div>}
 
       <div className="flex justify-end p-4 border-b border-slate-500 mx-auto w-full max-w-7xl text-xs text-yellow-500">
         <span>

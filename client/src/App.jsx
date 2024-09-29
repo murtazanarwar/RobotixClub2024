@@ -18,12 +18,13 @@ import OnlyAdmin from './components/OnlyAdmin';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import CreatePost2 from './oldComponents/Blog/BlogPost/BlogPost';
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <main className="pt-16">
+      <main className="pt-0">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -33,10 +34,10 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />}></Route>
           </Route>
-            <Route path="/create-post" element={<CreatePost />}></Route>
-            <Route path="/update-post/:postId" element={<UpdatePost />}></Route>
-          <Route element={<OnlyAdmin />}>
-          </Route>
+          <Route path="/create-post" element={<CreatePost />}></Route>
+          <Route path="/create-post2" element={<CreatePost2 />}></Route>
+          <Route path="/update-post/:postId" element={<UpdatePost />}></Route>
+          {/* <Route element={<OnlyAdmin />}></Route> */}
           <Route path="/post" element={<Post />}></Route>
           <Route path="/post/:postId" element={<PostPage />}></Route>
         </Routes>
