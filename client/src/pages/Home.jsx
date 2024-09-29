@@ -12,7 +12,6 @@ function Home() {
   const user = useRecoilValue(userState);
   console.log("user: " + user);
 
-  // Animation for the rotating elements
   const animat = (planet) => {
     planet
       .to(".dot-line", {
@@ -37,7 +36,6 @@ function Home() {
 
   const featuredText = useRef(null);
 
-  // Animations on mount
   useEffect(() => {
     const tl = gsap.timeline();
     const planet = gsap.timeline();
@@ -47,7 +45,6 @@ function Home() {
     animationScroll(".box1", 200, 1);
   }, []);
 
-  // Animation for featured text
   const animation = (tl, el) => {
     tl.from(el, {
       opacity: 1,
@@ -57,7 +54,6 @@ function Home() {
     });
   };
 
-  // Scroll-triggered animation for boxes
   const animationScroll = (element, xValue, delay) => {
     gsap.to(element, {
       scrollTrigger: element,
@@ -117,7 +113,6 @@ function Home() {
                     <ellipse cx="738.96" cy="445.59" rx="19.5" ry="19.66" />
                     <path className="yellow_fill" d="M746.29,445.59c0,4.05-3.28,7.33-7.33,7.33s-7.33-3.28-7.33-7.33,3.28-7.33,7.33-7.33,7.33,3.28,7.33,7.33Z" />
                   </g>
-                  {/* More planet-ab groups */}
                 </g>
               </svg>
             </div>
