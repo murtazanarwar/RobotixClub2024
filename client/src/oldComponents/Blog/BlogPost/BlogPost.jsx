@@ -4,7 +4,7 @@ import "./BlogPost.css";
 
 import { createPost } from "../../../api/postApi"
 
-const CreatePost = () => {
+const CreatePost2 = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
@@ -104,4 +104,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default CreatePost2;

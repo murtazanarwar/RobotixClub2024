@@ -18,6 +18,7 @@ import OnlyAdmin from './components/OnlyAdmin';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import CreatePost2 from './oldComponents/Blog/BlogPost/BlogPost';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />}></Route>
           </Route>
           <Route path="/create-post" element={<CreatePost />}></Route>
+          <Route path="/create-post2" element={<CreatePost2 />}></Route>
           <Route path="/update-post/:postId" element={<UpdatePost />}></Route>
           {/* <Route element={<OnlyAdmin />}></Route> */}
           <Route path="/post" element={<Post />}></Route>

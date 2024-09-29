@@ -85,7 +85,7 @@ export default function UpdatePost() {
           rows="5"
           required
         />
-
+{/* 
         <input
           type="text"
           placeholder="Author Name"
@@ -93,7 +93,7 @@ export default function UpdatePost() {
           onChange={(e) => setUpdatedPost({ ...updatedPost, author: e.target.value })}
           className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 placeholder-opacity-100 bg-gray-800"
           required
-        />
+        /> */}
 
         <button
           type="submit"
