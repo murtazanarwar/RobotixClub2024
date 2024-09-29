@@ -54,43 +54,50 @@ export default function UpdatePost() {
 
   return (
     <>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleUpdatePost} className="max-w-lg mx-auto p-4 bg-white shadow-md rounded">
+
+      <form onSubmit={handleUpdatePost} className="max-w-lg mx-auto p-6 bg-gray-900 shadow-lg rounded-lg">
+        
+        <h2 className="text-2xl font-semibold mb-6 text-center text-yellow-500">Update Post</h2>
+        
         <input
           type="text"
           placeholder="Title"
           value={updatedPost.title}
           onChange={(e) => setUpdatedPost({ ...updatedPost, title: e.target.value })}
-          className="w-full mb-3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 placeholder-opacity-100 bg-gray-800"
           required
         />
+
         <input
           type="text"
           placeholder="Category"
           value={updatedPost.category}
           onChange={(e) => setUpdatedPost({ ...updatedPost, category: e.target.value })}
-          className="w-full mb-3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 placeholder-opacity-100 bg-gray-800"
           required
         />
+
         <textarea
           placeholder="Content"
           value={updatedPost.content}
           onChange={(e) => setUpdatedPost({ ...updatedPost, content: e.target.value })}
-          className="w-full mb-3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
-          rows="4"
+          className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 placeholder-opacity-100 bg-gray-800"
+          rows="5"
           required
         />
+
         <input
           type="text"
           placeholder="Author Name"
           value={updatedPost.author}
           onChange={(e) => setUpdatedPost({ ...updatedPost, author: e.target.value })}
-          className="w-full mb-3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 placeholder-opacity-100 bg-gray-800"
           required
         />
+
         <button
           type="submit"
-          className="w-full bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600 transition-colors"
+          className="w-full bg-yellow-500 text-white p-3 rounded-lg hover:bg-yellow-600 transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-yellow-500"
         >
           Update Post
         </button>
@@ -98,7 +105,7 @@ export default function UpdatePost() {
 
       <button
         onClick={handleDeletePost}
-        className="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600 transition-colors mt-4"
+        className="w-full bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 transition-colors duration-200 mt-4 focus:outline-none focus:ring-4 focus:ring-red-500"
       >
         Delete Post
       </button>

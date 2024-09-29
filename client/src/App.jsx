@@ -33,10 +33,9 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />}></Route>
           </Route>
-            <Route path="/create-post" element={<CreatePost />}></Route>
-            <Route path="/update-post/:postId" element={<UpdatePost />}></Route>
-          <Route element={<OnlyAdmin />}>
-          </Route>
+          <Route path="/create-post" element={<CreatePost />}></Route>
+          <Route path="/update-post/:postId" element={<UpdatePost />}></Route>
+          {/* <Route element={<OnlyAdmin />}></Route> */}
           <Route path="/post" element={<Post />}></Route>
           <Route path="/post/:postId" element={<PostPage />}></Route>
         </Routes>
