@@ -16,6 +16,7 @@ const Login = () => {
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   // console.log(user);
+  console.log(user);
   
 
   const handleLogin = async (e) => {
@@ -32,7 +33,7 @@ const Login = () => {
 
         console.log("User state after login:", user);
 
-        navigate('/');
+        // navigate('/');
       } else {
         setError('No token received');
       }
