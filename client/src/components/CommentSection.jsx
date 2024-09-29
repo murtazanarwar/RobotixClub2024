@@ -49,13 +49,14 @@ function CommentSection({ postId }) {
   const handleAddComment = (e) => {
     e.preventDefault();
 
-    if (!user || !user._id) {
-      console.log("User is not logged in or user ID is not available.");
-      navigate('/log-in')
-      return;
-    }
+    // if (!user || !user._id) {
+    //   console.log("User is not logged in or user ID is not available.");
+    //   navigate('/log-in')
+    //   return;
+    // }
 
-    createComment({ ...newComment, author: user.userId, post: postId })
+    // createComment({ ...newComment, author: user.userId, post: postId })
+    createComment({ ...newComment, post: postId })
       .then((response) => setComments([...comments, response.data]))
       .catch((error) => console.log(error));
     setNewComment({ content: '', author: '' });
@@ -99,10 +100,8 @@ function CommentSection({ postId }) {
 
   return (
     <div className="space-y-8">
-      {/* Comments Heading */}
       <h3 className="text-xl font-bold text-gray-900 dark:text-yellow-500">Comments</h3>
 
-      {/* Add Comment Form */}
       <form onSubmit={handleAddComment} className="space-y-4 bg-gray-100 dark:bg-gray-800 p-5 rounded-lg shadow-md">
         <textarea
           className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-yellow-500 placeholder-opacity-100"
@@ -110,6 +109,14 @@ function CommentSection({ postId }) {
           value={newComment.content}
           onChange={(e) => setNewComment({ ...newComment, content: e.target.value })}
           rows="4"
+        />
+        <input
+          type="text"
+          placeholder="Author ID"
+          value={newComment.author}
+          onChange={(e) => setNewComment({ ...newComment, author: e.target.value })}
+          className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 bg-gray-800"
+          required
         />
         <button
           type="submit"
@@ -119,7 +126,6 @@ function CommentSection({ postId }) {
         </button>
       </form>
 
-      {/* Comments List */}
       {comments.map((comment) => (
         <div
           key={comment._id}

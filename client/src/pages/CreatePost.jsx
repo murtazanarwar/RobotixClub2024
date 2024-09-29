@@ -21,8 +21,13 @@ export default function CreatePost() {
   }, []);
 
   const handleCreatePost = async (postData) => {
+    // Remove <p> and </p> tags before saving to the database
+    const cleanContent = postData.content.replace(/<p>/g, '').replace(/<\/p>/g, '');
+    
+    const dataToSend = { ...postData, content: cleanContent };
+    
     try {
-      const response = await createPost(postData);
+      const response = await createPost(dataToSend);
       setPosts([response.data, ...posts]);
       setSuccess('Post created successfully!');
       setError('');
@@ -33,7 +38,6 @@ export default function CreatePost() {
       setSuccess('');
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // setPost({ ...post, author: user.__id});
@@ -113,7 +117,7 @@ export default function CreatePost() {
 
         <input
           type="text"
-          placeholder="Author Name"
+          placeholder="Author ID"
           value={post.author}
           onChange={(e) => setPost({ ...post, author: e.target.value })}
           className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 bg-gray-800"
