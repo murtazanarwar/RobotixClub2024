@@ -41,7 +41,9 @@ const Login = () => {
   };
 
   return (
-    <div className="login-form max-w-md mx-auto bg-gray-900 p-8 mt-10 rounded-lg shadow-lg">
+    <div className='loginWrap min-h-screen flex justify-center align-middle'>
+
+    <div className="login-form max-w-md mx-auto bg-gray-900 p-8 mt-10 rounded-lg shadow-lg ">
       <h2 className="text-3xl font-semibold text-center text-yellow-500 mb-6">Login</h2>
       <form onSubmit={handleLogin} className="space-y-6">
         <div>
@@ -78,6 +80,8 @@ const Login = () => {
         </div>
       </form>
     </div>
+    </div>
+
   );
 };
 
