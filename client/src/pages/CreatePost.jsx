@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { createPost, getAllPosts } from '../api/postApi';
 import { useSelector } from 'react-redux'
-// import { userState } from '../recoil/atom';
-// import { useRecoilValue } from 'recoil';
 
 export default function CreatePost() {
   const [posts, setPosts] = useState([]);
@@ -12,7 +10,6 @@ export default function CreatePost() {
   const [success, setSuccess] = useState('');
   const user = useSelector(state => state.user);
   // console.log(user);
-
 
   useEffect(() => {
     getAllPosts()
@@ -24,9 +21,6 @@ export default function CreatePost() {
   }, []);
 
   const handleCreatePost = async (postData) => {
-    console.log(postData);
-    
-    // Remove <p> and </p> tags before saving to the database
     const cleanContent = postData.content.replace(/<p>/g, '').replace(/<\/p>/g, '');
 
     const dataToSend = { ...postData, content: cleanContent };
@@ -40,6 +34,8 @@ export default function CreatePost() {
       setSuccess('Post created successfully!');
       setError('');
       setPost({ title: '', content: '', author: '', category: '', imageUrl: '' });
+      navigate(`/post/${response.data._id}`);
+      
     } catch (error) {
       console.error('Error creating post:', error);
       setError('Failed to create post');
@@ -65,8 +61,8 @@ export default function CreatePost() {
 
   return (
     <>
-      {/* {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-      {success && <p className="text-green-500 text-center mb-4">{success}</p>} */}
+      {error && <p className="text-red-500 text-center -4">{error}</p>}
+      {success && <p className="text-green-500 text-center mb-4">{success}</p>}
 
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-gray-900 shadow-lg rounded-lg">
 
@@ -124,8 +120,8 @@ export default function CreatePost() {
               ],
               toolbar:
                 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-              skin: 'oxide-dark',
-              content_css: 'dark',  //style not working
+              skin: 'oxide-dark',        
+              content_css: 'dark',
             }}
           />
         </div>
