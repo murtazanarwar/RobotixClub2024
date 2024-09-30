@@ -22,6 +22,8 @@ exports.getCommentForPost = async (req, res) => {
 
 exports.likeComment = async (req, res) => {
     try {
+        console.log(req.params.id);
+        
         const comment = await Comment.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } }, { new: true }); //{ new: true } ==> returns updated version
         res.json(comment);
     } catch (error) {

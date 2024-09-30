@@ -25,7 +25,7 @@ export default function UpdatePost() {
   const handleDeletePost = async () => {
     try {
       await deletePost(postId);
-      navigate('/');
+      navigate('/post');
     } catch (error) {
       console.log('Error deleting post:', error);
     }

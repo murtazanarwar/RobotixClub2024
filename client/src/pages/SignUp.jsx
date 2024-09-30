@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 // import "../styles/SignUp.css"
 import { signInFailure, signInSuccess } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSetRecoilState } from 'recoil';
-import { userState } from '../recoil/atom';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -21,8 +19,6 @@ export default function Signup() {
   // const setUser = useSetRecoilState(userState);
   const user = useSelector(state => state.user)
   const [userId, setUserid] = useState('');
-  // let userId;
-  // const [resp, setResp] = useState();
 
 
   const handleSignup = async (e) => {
