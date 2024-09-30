@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { createPost, getAllPosts } from '../api/postApi';
-import { userState } from '../recoil/atom';
-import { useRecoilValue } from 'recoil';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 export default function CreatePost() {
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState({ title: '', content: '', author: '', category: '', imageUrl: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const user = useRecoilValue(userState);
-  const navigate = useNavigate()
+  const user = useSelector(state => state.user);
+  // console.log(user);
 
   useEffect(() => {
     getAllPosts()
@@ -24,12 +22,15 @@ export default function CreatePost() {
 
   const handleCreatePost = async (postData) => {
     const cleanContent = postData.content.replace(/<p>/g, '').replace(/<\/p>/g, '');
-    
+
     const dataToSend = { ...postData, content: cleanContent };
+    console.log(dataToSend);
     
+
     try {
       const response = await createPost(dataToSend);
       setPosts([response.data, ...posts]);
+
       setSuccess('Post created successfully!');
       setError('');
       setPost({ title: '', content: '', author: '', category: '', imageUrl: '' });
@@ -41,12 +42,19 @@ export default function CreatePost() {
       setSuccess('');
     }
   };
+
+  console.log(user);
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setPost({ ...post, author: user.__id});
-    await handleCreatePost(post);
+    // console.log(user.userid);
+    setPost({ ...post, author: user.userid });
+
+    handleCreatePost(post);
   };
 
+  
   const handleContentChange = (content) => {
     setPost({ ...post, content });
   };
@@ -117,7 +125,7 @@ export default function CreatePost() {
             }}
           />
         </div>
-
+        {/* 
         <input
           type="text"
           placeholder="Author ID"
@@ -125,7 +133,7 @@ export default function CreatePost() {
           onChange={(e) => setPost({ ...post, author: e.target.value })}
           className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 bg-gray-800"
           required
-        />
+        /> */}
 
         <button
           type="submit"

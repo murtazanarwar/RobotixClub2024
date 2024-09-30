@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    currentUser: null,
-    currentUserID : null,
+    username: null,
+    userid : null,
     isAdmin : false
 }
 
@@ -12,12 +12,12 @@ const userSlice = createSlice({
     reducers: {
         signInSuccess: (state, action) => {
             console.log(action);
-            state.currentUserID = action.payload[0];
-            state.currentUser = action.payload[1];
+            state.userid = action.payload[0];
+            state.username = action.payload[1];
             
         },
         signInFailure: (state, action) => {
-            state.currentUser = null,
+            state.username = null,
             console.log(action);
             
         },
@@ -25,7 +25,7 @@ const userSlice = createSlice({
             state.isAdmin = true;
         },
         logout: (state) =>{
-            state.currentUser = null;
+            state.username = null;
         },
     },
 })

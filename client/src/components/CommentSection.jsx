@@ -4,6 +4,7 @@ import { getUser } from '../api/userApi';
 import { userState } from '../recoil/atom';
 import { useRecoilValue } from 'recoil';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function CommentSection({ postId }) {
   const [comments, setComments] = useState([]);
@@ -11,8 +12,10 @@ function CommentSection({ postId }) {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [updatedComment, setUpdatedComment] = useState({ content: '' });
   const [authorNames, setAuthorNames] = useState({});
-  const user = useRecoilValue(userState);
+  // const user = useRecoilValue(userState);
   const navigate = useNavigate();
+
+  const user = useSelector(state => state.user)
 
   console.log("user: " + user)
 
@@ -48,6 +51,7 @@ function CommentSection({ postId }) {
 
   const handleAddComment = (e) => {
     e.preventDefault();
+    setNewComment({...comments, author: user.userid})
 
     // if (!user || !user._id) {
     //   console.log("User is not logged in or user ID is not available.");
@@ -110,14 +114,14 @@ function CommentSection({ postId }) {
           onChange={(e) => setNewComment({ ...newComment, content: e.target.value })}
           rows="4"
         />
-        <input
+        {/* <input
           type="text"
           placeholder="Author ID"
           value={newComment.author}
           onChange={(e) => setNewComment({ ...newComment, author: e.target.value })}
           className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-500 transition-all duration-200 placeholder-yellow-500 bg-gray-800"
           required
-        />
+        /> */}
         <button
           type="submit"
           className="w-full px-4 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200 shadow-md"
