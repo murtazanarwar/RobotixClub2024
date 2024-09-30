@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { createComment, getCommentsForPost, editComment, deleteComment, likeComment } from '../api/commentApi';
 import { getUser } from '../api/userApi';
-import { userState } from '../recoil/atom';
-import { useRecoilValue } from 'recoil';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function CommentSection({ postId }) {
+  const user = useSelector(state => state.user);
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState({ content: '', author: '' });
+  const [newComment, setNewComment] = useState({ content: '', author: user.userid });
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [updatedComment, setUpdatedComment] = useState({ content: '' });
   const [authorNames, setAuthorNames] = useState({});
-  // const user = useRecoilValue(userState);
-  const navigate = useNavigate();
 
-  const user = useSelector(state => state.user)
-
-  console.log("user: " + user)
+  // console.log("user: " + user, newComment)
 
   useEffect(() => {
     const fetchAuthorNames = async () => {
       const namesMap = { ...authorNames };
-      
+
       await Promise.all(
         comments.map(async (comment) => {
           if (!namesMap[comment._id]) {
@@ -36,13 +31,13 @@ function CommentSection({ postId }) {
           }
         })
       );
-      
+
       setAuthorNames(namesMap);
     };
 
     fetchAuthorNames();
   }, [comments]);
-  
+
   useEffect(() => {
     getCommentsForPost(postId)
       .then((response) => setComments(response.data))
@@ -51,7 +46,7 @@ function CommentSection({ postId }) {
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    setNewComment({...comments, author: user.userid})
+    setNewComment({ ...comments, author: user.userid })
 
     // if (!user || !user._id) {
     //   console.log("User is not logged in or user ID is not available.");
@@ -63,13 +58,16 @@ function CommentSection({ postId }) {
     createComment({ ...newComment, post: postId })
       .then((response) => setComments([...comments, response.data]))
       .catch((error) => console.log(error));
-    setNewComment({ content: '', author: '' });
+
+    setNewComment({ content: '', author: user.userid });
+    console.log(newComment);
+
   };
 
   const handleLike = (commentId) => {
     likeComment(commentId)
       .then(() => setComments(
-        comments.map((comment) => 
+        comments.map((comment) =>
           comment._id === commentId ? { ...comment, likes: comment.likes + 1 } : comment
         )
       ))
@@ -161,10 +159,10 @@ function CommentSection({ postId }) {
             </form>
           ) : (
             <>
-              <p className="text-gray-800 dark:text-gray-300 text-base">{comment.content}</p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 <strong>Author: {authorNames[comment._id]}</strong>
               </p>
+              <p className="text-gray-800 dark:text-gray-300 text-base">{comment.content}</p>
               <p className="text-sm text-gray-600 dark:text-gray-400">Likes: {comment.likes}</p>
 
               <div className="space-x-3">
@@ -174,18 +172,14 @@ function CommentSection({ postId }) {
                 >
                   Like
                 </button>
-                <button
-                  className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200"
-                  onClick={() => handleEditComment(comment._id, comment.content)}
-                >
-                  Edit
-                </button>
-                <button
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200"
-                  onClick={() => handleDeleteComment(comment._id)}
-                >
-                  Delete
-                </button>
+                {comment.author === user.userid &&
+                  <button
+                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200"
+                    onClick={() => handleDeleteComment(comment._id)}
+                  >
+                    Delete
+                  </button>
+                }
               </div>
             </>
           )}

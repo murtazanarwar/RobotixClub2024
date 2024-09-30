@@ -1,51 +1,57 @@
 import React, { useEffect, useState } from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
-import { Spinner} from 'flowbite-react';
+import { useNavigate, useParams } from 'react-router-dom'
+import { Spinner } from 'flowbite-react';
 
 import { getAllPosts, getPost } from '../api/postApi';
 
 import CommentSection from '../components/CommentSection';
 import PostCard from '../components/PostCard';
+import { useSelector } from 'react-redux';
 
 export default function PostPage() {
-    const {postId} = useParams();
-    const [loading,setLoading] = useState(true);
-    const [error,setError] = useState(false);
-    const [post,setPost] = useState(null);
-    const [recentPosts,setRecentPost] = useState(null);
-    const [isAdmin, setIsAdmin] = useState(true)
-    const navigate = useNavigate();
+  const { postId } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [post, setPost] = useState(null);
+  const [recentPosts, setRecentPost] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(true)
+  const navigate = useNavigate();
+  const user = useSelector(state => state.user);
+  const userid = user.userid;
 
-    useEffect(() => {
-      getAllPosts()
-          .then((response) => setRecentPost(response.data))
-          .catch((e) => console.log(e));
-    }, []);
 
-    useEffect(() => {
-      getPost(postId)
-          .then((response) => {
-            setPost(response.data);
-            setError(false);
-            setLoading(false);
-          })
-          .catch((e) => {
-            setError(true);
-            setLoading(false);
-            console.log(e);
-          });
-    }, []);
+  useEffect(() => {
+    getAllPosts()
+      .then((response) => setRecentPost(response.data))
+      .catch((e) => console.log(e));
+  }, []);
 
-    const handleUpdatePost = (postId) => {
-      navigate(`/update-post/${postId}`)
-    }
+  useEffect(() => {
+    getPost(postId)
+      .then((response) => {
+        setPost(response.data);
+        setError(false);
+        setLoading(false);
+        // console.log(post, response);
+      })
+      .catch((e) => {
+        setError(true);
+        setLoading(false);
+        console.log(e);
+      });
 
-  if(loading) return (
+  }, []);
+
+  const handleUpdatePost = (postId) => {
+    navigate(`/update-post/${postId}`)
+  }
+
+  if (loading) return (
     <div className='flex justify-center items-center min-h-screen'>
-        <Spinner size = 'xl'></Spinner>
+      <Spinner size='xl'></Spinner>
     </div>
   )
-  
+
   return (
     <main className="p-4 flex flex-col max-w-7xl mx-auto min-h-screen">
       <h1 className="text-3xl mt-10 p-3 bg-yellow-600 rounded-lg text-center lg:text-5xl text-white">
@@ -67,7 +73,7 @@ export default function PostPage() {
         className="mt-10 p-3 max-h-[600px] w-full max-w-7xl self-center object-cover rounded-lg shadow-md"
       />
 
-      {isAdmin ?       <button
+      {post.author === userid ? <button
         className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors duration-200"
         onClick={() => handleUpdatePost(post._id)}
       >

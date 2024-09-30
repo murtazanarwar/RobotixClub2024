@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { createPost, getAllPosts } from '../api/postApi';
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
 export default function CreatePost() {
+  const user = useSelector(state => state.user);
   const [posts, setPosts] = useState([]);
-  const [post, setPost] = useState({ title: '', content: '', author: '', category: '', imageUrl: '' });
+  const [post, setPost] = useState({ title: '', content: '', author: user.userid, category: '', imageUrl: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const user = useSelector(state => state.user);
+  const navigate = useNavigate();
   // console.log(user);
+  // console.log(post);
+  
 
   useEffect(() => {
     getAllPosts()
@@ -24,7 +28,7 @@ export default function CreatePost() {
     const cleanContent = postData.content.replace(/<p>/g, '').replace(/<\/p>/g, '');
 
     const dataToSend = { ...postData, content: cleanContent };
-    console.log(dataToSend);
+    // console.log(dataToSend);
     
 
     try {
@@ -43,13 +47,16 @@ export default function CreatePost() {
     }
   };
 
-  console.log(user);
+  // console.log(user);
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(user.userid);
-    setPost({ ...post, author: user.userid });
+    console.log(user.userid);
+    let id = user.userid;
+    console.log(id);
+    
+    setPost({ ...post, author: id });
 
     handleCreatePost(post);
   };
