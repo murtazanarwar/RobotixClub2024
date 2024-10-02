@@ -6,6 +6,10 @@ import { useSelector } from 'react-redux';
 
 function CommentSection({ postId }) {
   const user = useSelector(state => state.user);
+  useEffect(() => {
+    console.log(user);
+  }, [])
+  
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({ content: '', author: user.userid });
   const [editingCommentId, setEditingCommentId] = useState(null);
@@ -25,7 +29,7 @@ function CommentSection({ postId }) {
               const response = await getUser(comment.author);
               namesMap[comment._id] = response.data.username;
             } catch (error) {
-              console.log(error);
+              // console.log(error);
               namesMap[comment._id] = 'Unknown Author';
             }
           }
@@ -43,6 +47,8 @@ function CommentSection({ postId }) {
       .then((response) => setComments(response.data))
       .catch((error) => console.log(error));
   }, [postId]);
+  console.log(user);
+  
 
   const handleAddComment = (e) => {
     e.preventDefault();
@@ -58,6 +64,8 @@ function CommentSection({ postId }) {
     createComment({ ...newComment, post: postId })
       .then((response) => setComments([...comments, response.data]))
       .catch((error) => console.log(error));
+      console.log(user);
+      
 
     setNewComment({ content: '', author: user.userid });
     console.log(newComment);
