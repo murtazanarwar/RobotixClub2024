@@ -6,10 +6,6 @@ import { useSelector } from 'react-redux';
 
 function CommentSection({ postId }) {
   const user = useSelector(state => state.user);
-  useEffect(() => {
-    console.log(user);
-  }, [])
-  
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({ content: '', author: user.userid });
   const [editingCommentId, setEditingCommentId] = useState(null);
@@ -46,9 +42,7 @@ function CommentSection({ postId }) {
     getCommentsForPost(postId)
       .then((response) => setComments(response.data))
       .catch((error) => console.log(error));
-  }, [postId]);
-  console.log(user);
-  
+  }, [postId]);  
 
   const handleAddComment = (e) => {
     e.preventDefault();
@@ -64,7 +58,6 @@ function CommentSection({ postId }) {
     createComment({ ...newComment, post: postId })
       .then((response) => setComments([...comments, response.data]))
       .catch((error) => console.log(error));
-      console.log(user);
       
 
     setNewComment({ content: '', author: user.userid });
