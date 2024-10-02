@@ -34,7 +34,7 @@ const Login = () => {
 
         setTimeout(() => {
           navigate('/');
-        }, 1);
+        }, 200);
       } else {
         setError('No token received');
       }

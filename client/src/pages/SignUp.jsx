@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, signup } from '../api/authApi';
 import { Link } from 'react-router-dom';
@@ -14,12 +14,8 @@ export default function Signup() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
-
-  // const setUser = useSetRecoilState(userState);
-  const user = useSelector(state => state.user)
-  const [userId, setUserid] = useState('');
-
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -38,22 +34,23 @@ export default function Signup() {
 
     try {
       const response = await signup({ username, email, password });
-      console.log(response.data);
+      // console.log(response.data);
       setSuccess('Signup successful!');
       setError('');
-      setUserid(response.data._id);
-      directLogin();
+      dispatch(signInSuccess([response.data._id, username]))
+      setTimeout(() => {
+        directLogin();
+      }, 1000);
     } catch (error) {
       setError('Signup failed. Please try again.');
     }
   };
 
+
   const directLogin = async () => {
     try {
       const response = await login({ email, password });
-      console.log(response);
 
-      
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         // localStorage.setItem('user', JSON.stringify(response.data));
@@ -62,8 +59,6 @@ export default function Signup() {
         setTimeout(() => {
           navigate('/');
         }, 1);
-        console.log(userId, username);
-        dispatch(signInSuccess([userId, username]))
 
       } else {
         setError('No token received');
