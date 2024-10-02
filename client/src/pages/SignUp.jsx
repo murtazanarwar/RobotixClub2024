@@ -41,14 +41,8 @@ export default function Signup() {
       console.log(response.data);
       setSuccess('Signup successful!');
       setError('');
-      // userId = response.data._id
       setUserid(response.data._id);
-      useEffect(() => {
-        console.log(userId);
-      }, [userId])
-
-      navigate('/')
-      // directLogin();
+      directLogin();
     } catch (error) {
       setError('Signup failed. Please try again.');
     }
@@ -57,15 +51,18 @@ export default function Signup() {
   const directLogin = async () => {
     try {
       const response = await login({ email, password });
+      console.log(response);
 
+      
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         // localStorage.setItem('user', JSON.stringify(response.data));
         setSuccess('Login successful!');
         setError('');
         setTimeout(() => {
-          // navigate('/');
+          navigate('/');
         }, 1);
+        console.log(userId, username);
         dispatch(signInSuccess([userId, username]))
 
       } else {
