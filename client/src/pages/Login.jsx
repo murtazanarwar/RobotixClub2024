@@ -6,25 +6,16 @@ import "../styles/Login.css";
 import { useDispatch, useSelector } from "react-redux"
 import { signInSuccess } from '../redux/user/userSlice';
 
-// import { useSetRecoilState, useRecoilValue } from 'recoil';
-// import { userState } from '../recoil/atom';
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
-  // const setUser = useSetRecoilState(userState);
-  // const user = useRecoilValue(userState);
   const [username, setUsername] = useState();
   const [userId, setUserId] = useState();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  // console.log(user);
-  // console.log(userId);
-
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -53,14 +44,15 @@ const Login = () => {
     }
   };
   dispatch(signInSuccess([userId, username]))
-  // const user = useSelector(state => state)
-  // console.log(user);
+  const user = useSelector(state => state)
+  console.log(user);
   
 
   return (
     <div className="loginWrap">
       <div className="login-form max-w-md mx-auto bg-gray-900 p-8 mt-10 rounded-lg shadow-lg">
         <h2 className="text-3xl font-semibold text-center text-yellow-500 mb-6">Login</h2>
+        {error && <p className='text-red-400 pb-3'>{error}</p>}
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <input
