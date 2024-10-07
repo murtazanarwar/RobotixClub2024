@@ -3,6 +3,7 @@ const router = express.Router();
 const postController = require('../controllers/postController');
 
 router.get('/', postController.getAllPosts); //get all posts
+router.get('/limit-posts/:limit', postController.getLimitPosts); //delete post
 router.post('/', postController.createPost); //create post //checked
 router.get('/:id', postController.getPost); //get post
 router.put('/:id', postController.updatePost); //update post

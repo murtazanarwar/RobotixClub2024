@@ -14,6 +14,14 @@ export const getPost = (postId) => {
   return axios.get(`${API_BASE_URL}/${postId}`);
 };
 
+export const getLimitPost = (limit) => {
+  return axios.get(`${API_BASE_URL}/limit-posts/${limit}`);
+};
+
+export const getPosts = (postId) => {
+  // return axios.get(`${API_BASE_URL}/${}`);
+};
+
 export const updatePost = (postId, postData) => {
   return axios.put(`${API_BASE_URL}/${postId}`, postData);
 };
