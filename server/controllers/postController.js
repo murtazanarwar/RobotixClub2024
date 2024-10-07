@@ -9,6 +9,16 @@ exports.getAllPosts = async (req, res) => {
     }
 };
 
+exports.getLimitPosts = async (req, res) => {
+    try {
+        const posts = await Post.find().limit(req.params.limit);
+        console.log("limitposts", posts);
+        res.json(posts);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 exports.createPost = async (req, res) => {
     try {
         console.log(req.body);

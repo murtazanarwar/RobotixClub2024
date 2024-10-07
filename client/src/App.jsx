@@ -30,6 +30,7 @@ function App() {
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/log-in" element={<Login />} />
           <Route path="/search" element={<Search />}></Route>
+          <Route path="/search/:searh-query" element={<Search />}></Route>
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />}></Route>
           </Route>
